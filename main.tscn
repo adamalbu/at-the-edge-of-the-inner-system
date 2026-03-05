@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cbrd5uthhsyjh"]
 
 [ext_resource type="Texture2D" uid="uid://cp1l3ql8b6gvt" path="res://stars.png" id="1_h2yge"]
-[ext_resource type="Texture2D" uid="uid://dqbkcf1fwh3pu" path="res://icon.svg" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://cdrm21hjt22fg" path="res://player.gd" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://assets/spaceship.png" id="2_h2yge"]
 
 [node name="Node2D" type="Node2D" unique_id=2012011173]
 
@@ -15,7 +15,9 @@ scale = Vector2(2.24, 2.24)
 texture = ExtResource("1_h2yge")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=961911905]
-texture = ExtResource("1_ig7tw")
+scale = Vector2(4, 4)
+texture = ExtResource("2_h2yge")
+region_rect = Rect2(0, 0, 27.710037, 24.971848)
 script = ExtResource("2_0xm2m")
 
 [node name="Camera2D" type="Camera2D" parent="Sprite2D" unique_id=207304984]
