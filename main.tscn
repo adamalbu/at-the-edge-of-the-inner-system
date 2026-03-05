@@ -3,6 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://cp1l3ql8b6gvt" path="res://stars.png" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://cdrm21hjt22fg" path="res://player.gd" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://assets/spaceship.png" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://uf6mdh0rpmsr" path="res://spawn_asteroids.gd" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://c56qoa61cqbox" path="res://asteroid.tscn" id="5_lquwl"]
+
+[sub_resource type="Curve2D" id="Curve2D_lquwl"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -256, -144, 0, 0, 0, 0, 256, -144, 0, 0, 0, 0, 256, 144, 0, 0, 0, 0, -256, 144, 0, 0, 0, 0, -256, -144)
+}
+point_count = 5
 
 [node name="Node2D" type="Node2D" unique_id=2012011173]
 
@@ -14,12 +22,30 @@ position = Vector2(578, 322)
 scale = Vector2(2.24, 2.24)
 texture = ExtResource("1_h2yge")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=961911905]
+[node name="Player" type="Sprite2D" parent="." unique_id=961911905]
 scale = Vector2(4, 4)
 texture = ExtResource("2_h2yge")
 region_rect = Rect2(0, 0, 27.710037, 24.971848)
 script = ExtResource("2_0xm2m")
 
-[node name="Camera2D" type="Camera2D" parent="Sprite2D" unique_id=207304984]
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=207304984]
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
+
+[node name="SpawnPath" type="Path2D" parent="Player" unique_id=634389387]
+position = Vector2(-7.6293945e-06, 1.9073486e-06)
+scale = Vector2(1.0625, 1.1111112)
+curve = SubResource("Curve2D_lquwl")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/SpawnPath" unique_id=1119896266]
+position = Vector2(-256, -144)
+
+[node name="AsteroidSpawner" type="Node" parent="." unique_id=33070321 node_paths=PackedStringArray("spawn_path_follow", "player")]
+script = ExtResource("4_1bvp3")
+spawn_path_follow = NodePath("../Player/SpawnPath/PathFollow2D")
+asteroid_scene = ExtResource("5_lquwl")
+player = NodePath("../Player")
+
+[node name="SpawnTimer" type="Timer" parent="AsteroidSpawner" unique_id=393040802]
+wait_time = 4.0
+autostart = true
