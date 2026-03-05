@@ -1,8 +1,8 @@
 extends Sprite2D
 
-const SPEED = 200
+const SPEED = 2
 const DRAG = 1.001
-const ANGULAR_SPEED = 0.01
+const ANGULAR_SPEED = 0.02
 const ANGULAR_DRAG = 1.001
 
 var velocity = Vector2(0, 0)
