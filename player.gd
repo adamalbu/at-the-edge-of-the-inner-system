@@ -2,7 +2,7 @@ extends Sprite2D
 
 const SPEED = 200
 const DRAG = 1.001
-const ANGULAR_SPEED = 0.0001
+const ANGULAR_SPEED = 0.01
 const ANGULAR_DRAG = 1.001
 
 var velocity = Vector2(0, 0)
@@ -23,9 +23,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("backwards"):
 		direction.y += 1
 	if Input.is_action_pressed("left"):
-		angular_velocity -= ANGULAR_SPEED
+		angular_velocity -= ANGULAR_SPEED * delta
 	if Input.is_action_pressed("right"):
-		angular_velocity += ANGULAR_SPEED
+		angular_velocity += ANGULAR_SPEED * delta
 
 	angular_velocity /= ANGULAR_DRAG
 	self.rotation += angular_velocity
