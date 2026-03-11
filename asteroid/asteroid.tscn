@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c56qoa61cqbox"]
 
-[ext_resource type="Script" uid="uid://vqbkuak2c8xw" path="res://asteroid.gd" id="1_p0ukn"]
+[ext_resource type="Script" uid="uid://vqbkuak2c8xw" path="res://asteroid/asteroid.gd" id="1_p0ukn"]
 [ext_resource type="Texture2D" uid="uid://dqbkcf1fwh3pu" path="res://icon.svg" id="1_u87q6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0ukn"]

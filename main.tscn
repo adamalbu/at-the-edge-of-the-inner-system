@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cbrd5uthhsyjh"]
 
 [ext_resource type="Texture2D" uid="uid://cp1l3ql8b6gvt" path="res://stars.png" id="1_h2yge"]
-[ext_resource type="Script" uid="uid://v57jqm0nfxgs" path="res://player.gd" id="2_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://assets/spaceship.png" id="2_h2yge"]
-[ext_resource type="Script" uid="uid://uf6mdh0rpmsr" path="res://spawn_asteroids.gd" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://c56qoa61cqbox" path="res://asteroid.tscn" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://v57jqm0nfxgs" path="res://player/player.gd" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://player/spaceship.png" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://uf6mdh0rpmsr" path="res://asteroid/spawn_asteroids.gd" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://c56qoa61cqbox" path="res://asteroid/asteroid.tscn" id="5_lquwl"]
 
 [sub_resource type="Curve2D" id="Curve2D_lquwl"]
 _data = {
