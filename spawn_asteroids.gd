@@ -1,7 +1,5 @@
 extends Node
 
-# TODO: Rework spawning mechanism
-
 @export
 var spawn_path_follow: PathFollow2D
 @export
@@ -16,8 +14,12 @@ var spawn_timer = $SpawnTimer
 @onready
 var spawn_path = $SpawnPath
 
+var noise = FastNoiseLite.new()
 
 func _ready() -> void:
+	noise.seed = 5
+	noise.frequency = 0.005
+
 	spawn_timer.connect("timeout", _on_timer_timeout)
 	spawn_asteroid()
 

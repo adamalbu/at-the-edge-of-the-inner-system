@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cbrd5uthhsyjh"]
 
 [ext_resource type="Texture2D" uid="uid://cp1l3ql8b6gvt" path="res://stars.png" id="1_h2yge"]
-[ext_resource type="Script" uid="uid://cdrm21hjt22fg" path="res://player.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://v57jqm0nfxgs" path="res://player.gd" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://assets/spaceship.png" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://uf6mdh0rpmsr" path="res://spawn_asteroids.gd" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://c56qoa61cqbox" path="res://asteroid.tscn" id="5_lquwl"]
@@ -22,22 +22,29 @@ position = Vector2(578, 322)
 scale = Vector2(2.24, 2.24)
 texture = ExtResource("1_h2yge")
 
-[node name="Player" type="Sprite2D" parent="." unique_id=961911905]
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=2006633837]
+mass = 400.0
+gravity_scale = 0.0
+script = ExtResource("2_0xm2m")
+
+[node name="Player" type="Sprite2D" parent="RigidBody2D" unique_id=961911905]
 scale = Vector2(4, 4)
 texture = ExtResource("2_h2yge")
 region_rect = Rect2(0, 0, 27.710037, 24.971848)
-script = ExtResource("2_0xm2m")
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=207304984]
+[node name="Camera2D" type="Camera2D" parent="RigidBody2D/Player" unique_id=207304984]
 position_smoothing_enabled = true
-position_smoothing_speed = 2.0
+position_smoothing_speed = 4.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D" unique_id=525289533]
+polygon = PackedVector2Array(-60, 17, -60, -17, -4, -52, 4, -52, 60, -17, 60, 17, 32, 36, -32, 36)
 
 [node name="AsteroidSpawner" type="Node" parent="." unique_id=33070321 node_paths=PackedStringArray("spawn_path_follow", "player", "camera")]
 script = ExtResource("4_1bvp3")
 spawn_path_follow = NodePath("SpawnPath/PathFollow2D")
 asteroid_scene = ExtResource("5_lquwl")
-player = NodePath("../Player")
-camera = NodePath("../Player/Camera2D")
+player = NodePath("../RigidBody2D/Player")
+camera = NodePath("../RigidBody2D/Player/Camera2D")
 
 [node name="SpawnTimer" type="Timer" parent="AsteroidSpawner" unique_id=393040802]
 wait_time = 4.0

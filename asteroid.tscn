@@ -3,8 +3,16 @@
 [ext_resource type="Script" uid="uid://vqbkuak2c8xw" path="res://asteroid.gd" id="1_p0ukn"]
 [ext_resource type="Texture2D" uid="uid://dqbkcf1fwh3pu" path="res://icon.svg" id="1_u87q6"]
 
-[node name="Asteroid" type="Node2D" unique_id=1492827414]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0ukn"]
+size = Vector2(128, 128)
+
+[node name="Asteroid" type="RigidBody2D" unique_id=1179274677]
+mass = 8000.0
+gravity_scale = 0.0
 script = ExtResource("1_p0ukn")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1078864085]
 texture = ExtResource("1_u87q6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=418915752]
+shape = SubResource("RectangleShape2D_p0ukn")
