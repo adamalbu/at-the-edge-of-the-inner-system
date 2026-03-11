@@ -7,12 +7,6 @@
 [ext_resource type="Script" uid="uid://b6d6ipar2ppvm" path="res://player/laser.gd" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://c56qoa61cqbox" path="res://asteroid/asteroid.tscn" id="5_lquwl"]
 
-[sub_resource type="Curve2D" id="Curve2D_lquwl"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -256, -144, 0, 0, 0, 0, 256, -144, 0, 0, 0, 0, 256, 144, 0, 0, 0, 0, -256.23358, 144, 0, 0, 0, 0, -256, -144)
-}
-point_count = 5
-
 [node name="Node2D" type="Node2D" unique_id=2012011173]
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1428591634]
@@ -48,33 +42,16 @@ position = Vector2(54, -20)
 
 [node name="Camera2D" type="Camera2D" parent="RigidBody2D" unique_id=207304984]
 scale = Vector2(4, 4)
+zoom = Vector2(0.7, 0.7)
 position_smoothing_enabled = true
-position_smoothing_speed = 4.0
+position_smoothing_speed = 2.5
 
 [node name="RayCast2D" type="RayCast2D" parent="RigidBody2D" unique_id=1858444862 node_paths=PackedStringArray("lasers")]
 target_position = Vector2(0, -2000)
 script = ExtResource("4_7mycd")
 lasers = [NodePath("../LaserPosLeft"), NodePath("../LaserPosRight")]
 
-[node name="AsteroidSpawner" type="Node" parent="." unique_id=33070321 node_paths=PackedStringArray("spawn_path_follow", "player", "camera")]
+[node name="AsteroidSpawner" type="Node" parent="." unique_id=33070321 node_paths=PackedStringArray("player")]
 script = ExtResource("4_1bvp3")
-spawn_path_follow = NodePath("SpawnPath/PathFollow2D")
 asteroid_scene = ExtResource("5_lquwl")
-player = NodePath("../RigidBody2D/Player")
-camera = NodePath("../RigidBody2D/Camera2D")
-
-[node name="SpawnTimer" type="Timer" parent="AsteroidSpawner" unique_id=393040802]
-wait_time = 4.0
-autostart = true
-
-[node name="SpawnPath" type="Path2D" parent="AsteroidSpawner" unique_id=634389387]
-position = Vector2(-3.0517578e-05, 7.6293945e-06)
-scale = Vector2(4.28125, 4.611111)
-curve = SubResource("Curve2D_lquwl")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="AsteroidSpawner/SpawnPath" unique_id=1119896266]
-position = Vector2(-256, -144)
-
-[node name="Asteroid" parent="." unique_id=1179274677 node_paths=PackedStringArray("player") instance=ExtResource("5_lquwl")]
-position = Vector2(332, -103)
-player = NodePath("../RigidBody2D/Player")
+player = NodePath("../RigidBody2D")
