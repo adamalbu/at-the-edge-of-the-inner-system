@@ -6,7 +6,21 @@ const TORQUE = 700000.0
 @export var max_health = 100.0
 var health = max_health
 
+var controllable = true
+var dead = false
+
+signal game_over
+
+
+func _process(_delta: float) -> void:
+	if health <= 0 && !dead:
+		$AnimationPlayer.play("die")
+		dead = true
+
 func _physics_process(_delta: float) -> void:
+	if !controllable:
+		return
+
 	var thrust = 0.0
 	if Input.is_action_pressed("forward"):
 		thrust -= THRUST
@@ -33,3 +47,12 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 			var lost_health = impulse * 0.0003
 
 			health -= lost_health
+
+func set_controllable():
+	controllable = true
+
+func set_uncontrollable():
+	controllable = false
+
+func send_game_over():
+	game_over.emit()
