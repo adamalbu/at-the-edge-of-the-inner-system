@@ -4,18 +4,26 @@ extends RigidBody2D
 var health = max_health
 
 var max_size = 0.0
+var destroying = false
+
+@onready var control = $Control
 
 signal destroyed(asteroid)
 
 func _ready():
 	max_size = $Control/HealthBg.size.x
 
+	$Sprite2D.rotation_degrees = randf_range(0, 360)
+
 func _process(_delta: float):
-	if health != max_health:
+	control.rotation = -rotation
+	control.global_position = global_position - Vector2(control.size.x / 2, -70)
+
+	if health != max_health && !destroying:
 		$Control.visible = true
 		$Control/HealthFg.size.x = (health / max_health) * max_size
 
-	if health <= 0:
+	if health <= 0 && !destroying:
 		destroy()
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
@@ -29,5 +37,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 			health -= lost_health
 
 func destroy():
+	destroying = true
 	destroyed.emit(self)
-	queue_free()
+	$AnimationPlayer.play("asteroid_delete")

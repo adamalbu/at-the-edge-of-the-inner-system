@@ -1,10 +1,151 @@
 [gd_scene format=3 uid="uid://c56qoa61cqbox"]
 
 [ext_resource type="Script" uid="uid://dfqc3c8uv2ayv" path="res://asteroid/asteroid.gd" id="1_ow88a"]
-[ext_resource type="Texture2D" uid="uid://dqbkcf1fwh3pu" path="res://icon.svg" id="1_u87q6"]
+[ext_resource type="Texture2D" uid="uid://d1iqsyma12366" path="res://asteroid/asteroid.png" id="2_ow88a"]
+[ext_resource type="Texture2D" uid="uid://px8cp3b0h1dc" path="res://asteroid/asteroid_normal.png" id="3_kkysg"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0ukn"]
-size = Vector2(128, 128)
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kkysg"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 72.2
+initial_velocity_max = 713.6
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+gravity = Vector3(0, 0, 0)
+scale_min = 10.83
+scale_max = 21.68
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_iic4w"]
+diffuse_texture = ExtResource("2_ow88a")
+normal_texture = ExtResource("3_kkysg")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kkysg"]
+radius = 97.020615
+
+[sub_resource type="Animation" id="Animation_iic4w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_84fqd"]
+resource_name = "asteroid_delete"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7gw88"]
+_data = {
+&"RESET": SubResource("Animation_iic4w"),
+&"asteroid_delete": SubResource("Animation_84fqd")
+}
 
 [node name="Asteroid" type="RigidBody2D" unique_id=1179274677 groups=["asteroid"]]
 mass = 8000.0
@@ -13,20 +154,29 @@ contact_monitor = true
 max_contacts_reported = 2
 script = ExtResource("1_ow88a")
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=1078864085]
-texture = ExtResource("1_u87q6")
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1223965343]
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_kkysg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1078864085]
+rotation = 0.0017016846
+scale = Vector2(4, 4)
+texture = SubResource("CanvasTexture_iic4w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=418915752]
-shape = SubResource("RectangleShape2D_p0ukn")
+visible = false
+shape = SubResource("CircleShape2D_kkysg")
 
 [node name="Control" type="Control" parent="." unique_id=495250930]
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_left = -54.0
-offset_top = 56.0
-offset_right = 54.0
-offset_bottom = 67.0
+offset_right = 108.0
+offset_bottom = 11.0
 
 [node name="HealthBg" type="ColorRect" parent="Control" unique_id=2079896843]
 layout_mode = 1
@@ -45,3 +195,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2110511310]
+libraries/ = SubResource("AnimationLibrary_7gw88")
+autoplay = &"RESET"
