@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cbrd5uthhsyjh"]
 
+[ext_resource type="Script" uid="uid://lvu0ttrm562g" path="res://ui.gd" id="1_272bh"]
 [ext_resource type="Texture2D" uid="uid://cp1l3ql8b6gvt" path="res://stars.png" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://v57jqm0nfxgs" path="res://player/player.gd" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://player/spaceship.png" id="2_h2yge"]
@@ -8,6 +9,24 @@
 [ext_resource type="PackedScene" uid="uid://c56qoa61cqbox" path="res://asteroid/asteroid.tscn" id="5_lquwl"]
 
 [node name="Node2D" type="Node2D" unique_id=2012011173]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1648034863]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1086811036]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_272bh")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=596389117]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 37
+text = "$0"
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1428591634]
 scroll_offset = Vector2(5158, 659)
@@ -51,7 +70,7 @@ target_position = Vector2(0, -2000)
 script = ExtResource("4_7mycd")
 lasers = [NodePath("../LaserPosLeft"), NodePath("../LaserPosRight")]
 
-[node name="AsteroidSpawner" type="Node" parent="." unique_id=33070321 node_paths=PackedStringArray("player")]
+[node name="AsteroidManager" type="Node" parent="." unique_id=33070321 node_paths=PackedStringArray("player")]
 script = ExtResource("4_1bvp3")
 asteroid_scene = ExtResource("5_lquwl")
 player = NodePath("../RigidBody2D")

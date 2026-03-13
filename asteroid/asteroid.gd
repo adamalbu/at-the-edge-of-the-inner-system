@@ -5,6 +5,8 @@ var health = max_health
 
 var max_size = 0.0
 
+signal destroyed(asteroid)
+
 func _ready():
 	max_size = $Control/HealthBg.size.x
 
@@ -14,4 +16,8 @@ func _process(_delta: float):
 		$Control/HealthFg.size.x = (health / max_health) * max_size
 
 	if health <= 0:
-		queue_free()
+		destroy()
+
+func destroy():
+	destroyed.emit(self)
+	queue_free()

@@ -59,6 +59,7 @@ func spawn_chunk(chunk):
 				var asteroid: RigidBody2D = asteroid_scene.instantiate()
 
 				asteroid.position = Vector2(base.x + x + randf_range(-50, 50), base.y + y + randf_range(-50, 50))
+				asteroid.connect("destroyed", _on_asteroid_destroyed)
 
 				add_child(asteroid)
 				asteroids.append(asteroid)
@@ -71,3 +72,6 @@ func despawn_chunk(chunk):
 			asteroid.queue_free()
 
 	loaded_chunks.erase(chunk)
+
+func _on_asteroid_destroyed(_asteroid):
+	GameState.money += 10
