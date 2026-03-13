@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c56qoa61cqbox"]
 
+[ext_resource type="Script" uid="uid://dfqc3c8uv2ayv" path="res://asteroid/asteroid.gd" id="1_ow88a"]
 [ext_resource type="Texture2D" uid="uid://dqbkcf1fwh3pu" path="res://icon.svg" id="1_u87q6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0ukn"]
@@ -8,9 +9,37 @@ size = Vector2(128, 128)
 [node name="Asteroid" type="RigidBody2D" unique_id=1179274677]
 mass = 8000.0
 gravity_scale = 0.0
+script = ExtResource("1_ow88a")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1078864085]
 texture = ExtResource("1_u87q6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=418915752]
 shape = SubResource("RectangleShape2D_p0ukn")
+
+[node name="Control" type="Control" parent="." unique_id=495250930]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -54.0
+offset_top = 56.0
+offset_right = 54.0
+offset_bottom = 67.0
+
+[node name="HealthBg" type="ColorRect" parent="Control" unique_id=2079896843]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.15727392, 0.15727395, 0.15727395, 1)
+
+[node name="HealthFg" type="ColorRect" parent="Control" unique_id=1927617651]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
