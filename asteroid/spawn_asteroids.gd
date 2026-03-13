@@ -15,6 +15,8 @@ var noise = FastNoiseLite.new()
 
 var loaded_chunks: Dictionary = {}
 
+var destroyed_asteroids: Dictionary = {}
+
 func _ready():
 	noise.seed = 621
 	noise.frequency = 0.0005
@@ -55,10 +57,17 @@ func spawn_chunk(chunk):
 		for y in range(0, CHUNK_SIZE, SAMPLE_SPACE):
 			var value = noise.get_noise_2d(base.x + x, base.y + y)
 
-			if value >= SPAWN_THRESHOLD :
+			if value >= SPAWN_THRESHOLD:
+				var world_pos = Vector2i(base.x + x, base.y + y)
+				# TODO: Better way to do this
+				if world_pos in destroyed_asteroids:
+					continue
+
 				var asteroid: RigidBody2D = asteroid_scene.instantiate()
 
-				asteroid.position = Vector2(base.x + x + randf_range(-50, 50), base.y + y + randf_range(-50, 50))
+				asteroid.position = Vector2(world_pos.x + randf_range(-50, 50), world_pos.y + randf_range(-50, 50))
+				asteroid.id = Vector2i(world_pos)
+				asteroid.linear_velocity = Vector2(randf_range(-15, 15), randf_range(-15, 15))
 				asteroid.connect("destroyed", _on_asteroid_destroyed)
 
 				add_child(asteroid)
@@ -73,5 +82,12 @@ func despawn_chunk(chunk):
 
 	loaded_chunks.erase(chunk)
 
-func _on_asteroid_destroyed(_asteroid):
+func _on_asteroid_destroyed(asteroid):
+	destroyed_asteroids[asteroid.id] = true
+	for chunk in loaded_chunks:
+		var list = loaded_chunks[chunk]
+		var i = list.find(asteroid)
+		if i != -1:
+			list.remove_at(i)
+			break
 	GameState.money += 10

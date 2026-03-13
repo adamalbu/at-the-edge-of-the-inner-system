@@ -8,6 +8,9 @@ var destroying = false
 
 @onready var control = $Control
 
+var id: Vector2i
+var damaged_by_player: bool
+
 signal destroyed(asteroid)
 
 func _ready():
@@ -19,7 +22,7 @@ func _process(_delta: float):
 	control.rotation = -rotation
 	control.global_position = global_position - Vector2(control.size.x / 2, -70)
 
-	if health != max_health && !destroying:
+	if damaged_by_player && !destroying:
 		$Control.visible = true
 		$Control/HealthFg.size.x = (health / max_health) * max_size
 
@@ -29,6 +32,11 @@ func _process(_delta: float):
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	for i in state.get_contact_count():
 		var impulse = state.get_contact_impulse(i).length()
+
+		if !damaged_by_player:
+			for body in get_colliding_bodies():
+				if body.is_in_group("player"):
+					damaged_by_player = true
 
 		if impulse > 700:
 

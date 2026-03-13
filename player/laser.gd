@@ -24,7 +24,9 @@ func _process(delta: float) -> void:
 		laser_particles.emitting = true
 		var object = get_collider()
 		if object is Object:
-			get_collider().health -= 10 * delta
+			var asteroid = get_collider()
+			asteroid.health -= 10 * delta
+			asteroid.damaged_by_player = true
 	else:
 		mine_particles.emitting = false
 		laser_particles.emitting = false
