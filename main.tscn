@@ -8,6 +8,45 @@
 [ext_resource type="Script" uid="uid://b6d6ipar2ppvm" path="res://player/laser.gd" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://c56qoa61cqbox" path="res://asteroid/asteroid.tscn" id="5_lquwl"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5vw27"]
+lifetime_randomness = 0.27
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 13.24
+initial_velocity_max = 42.559998
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = -2.2351742e-06
+damping_min = 0.24100001
+damping_max = 2.046
+scale_min = 0.0
+scale_max = 7.0099998
+color = Color(0, 0.99607843, 0, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_272bh"]
+lifetime_randomness = 0.27
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+inherit_velocity_ratio = 1.0
+velocity_pivot = Vector3(3.265, 3.96, 5.515)
+direction = Vector3(0, 1.995, 0)
+spread = 180.0
+initial_velocity_min = 277.52
+initial_velocity_max = 306.84
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = -2.2351742e-06
+damping_min = 0.24100001
+damping_max = 2.046
+scale_min = 0.0
+scale_max = 3.3999999
+color = Color(0, 1, 0, 1)
+
 [node name="Node2D" type="Node2D" unique_id=2012011173]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1648034863]
@@ -53,22 +92,32 @@ region_rect = Rect2(0, 0, 27.710037, 24.971848)
 polygon = PackedVector2Array(-60, 17, -60, -17, -4, -52, 4, -52, 60, -17, 60, 17, 32, 36, -32, 36)
 metadata/_edit_lock_ = true
 
-[node name="LaserPosLeft" type="Node2D" parent="RigidBody2D" unique_id=1356938411]
-position = Vector2(-54, -20)
-
-[node name="LaserPosRight" type="Node2D" parent="RigidBody2D" unique_id=1050465460]
-position = Vector2(54, -20)
-
 [node name="Camera2D" type="Camera2D" parent="RigidBody2D" unique_id=207304984]
 scale = Vector2(4, 4)
 zoom = Vector2(0.7, 0.7)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.5
 
-[node name="RayCast2D" type="RayCast2D" parent="RigidBody2D" unique_id=1858444862 node_paths=PackedStringArray("lasers")]
+[node name="Laser" type="RayCast2D" parent="RigidBody2D" unique_id=1858444862 node_paths=PackedStringArray("lasers")]
 target_position = Vector2(0, -2000)
 script = ExtResource("4_7mycd")
-lasers = [NodePath("../LaserPosLeft"), NodePath("../LaserPosRight")]
+lasers = [NodePath("LaserPosLeft"), NodePath("LaserPosRight")]
+
+[node name="LaserParticles" type="GPUParticles2D" parent="RigidBody2D/Laser" unique_id=1194459819]
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_5vw27")
+
+[node name="MineParticles" type="GPUParticles2D" parent="RigidBody2D/Laser" unique_id=2053322509]
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_272bh")
+
+[node name="LaserPosLeft" type="Node2D" parent="RigidBody2D/Laser" unique_id=1356938411]
+position = Vector2(-54, -20)
+
+[node name="LaserPosRight" type="Node2D" parent="RigidBody2D/Laser" unique_id=1050465460]
+position = Vector2(54, -20)
 
 [node name="AsteroidManager" type="Node" parent="." unique_id=33070321 node_paths=PackedStringArray("player")]
 script = ExtResource("4_1bvp3")
