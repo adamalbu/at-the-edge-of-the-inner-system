@@ -6,9 +6,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0ukn"]
 size = Vector2(128, 128)
 
-[node name="Asteroid" type="RigidBody2D" unique_id=1179274677]
+[node name="Asteroid" type="RigidBody2D" unique_id=1179274677 groups=["asteroid"]]
 mass = 8000.0
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 2
 script = ExtResource("1_ow88a")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1078864085]

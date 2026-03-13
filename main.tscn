@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://lvu0ttrm562g" path="res://ui.gd" id="1_272bh"]
 [ext_resource type="Texture2D" uid="uid://cp1l3ql8b6gvt" path="res://stars.png" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://v57jqm0nfxgs" path="res://player/player.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://dqr17jgpm5w68" path="res://player/healthbar.gd" id="2_5vw27"]
 [ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://player/spaceship.png" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://uf6mdh0rpmsr" path="res://asteroid/spawn_asteroids.gd" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://b6d6ipar2ppvm" path="res://player/laser.gd" id="4_7mycd"]
@@ -67,6 +68,29 @@ offset_bottom = 23.0
 theme_override_font_sizes/font_size = 37
 text = "$0"
 
+[node name="HealthbarBG" type="ColorRect" parent="CanvasLayer/Control" unique_id=1695075014 node_paths=PackedStringArray("player")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -416.0
+offset_top = 35.0
+offset_right = -35.0
+offset_bottom = 90.0
+grow_horizontal = 0
+color = Color(0.15686275, 0.15686275, 0.15686275, 1)
+script = ExtResource("2_5vw27")
+player = NodePath("../../../RigidBody2D")
+
+[node name="HealthbarFG" type="ColorRect" parent="CanvasLayer/Control/HealthbarBG" unique_id=1826070772]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
+
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1428591634]
 scroll_offset = Vector2(5158, 659)
 repeat_size = Vector2(3840, 2160)
@@ -78,9 +102,10 @@ scale = Vector2(2.24, 2.24)
 texture = ExtResource("1_h2yge")
 metadata/_edit_lock_ = true
 
-[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=2006633837]
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=2006633837 groups=["player"]]
 mass = 400.0
 gravity_scale = 0.0
+max_contacts_reported = 1
 script = ExtResource("2_0xm2m")
 
 [node name="Player" type="Sprite2D" parent="RigidBody2D" unique_id=961911905]
@@ -89,7 +114,7 @@ texture = ExtResource("2_h2yge")
 region_rect = Rect2(0, 0, 27.710037, 24.971848)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D" unique_id=525289533]
-polygon = PackedVector2Array(-60, 17, -60, -17, -4, -52, 4, -52, 60, -17, 60, 17, 32, 36, -32, 36)
+polygon = PackedVector2Array(-60, 17, -60, -17, -54, -22, -48, -17, -46, -7, -4, -52, 4, -52, 46, -8, 48, -17, 54, -22, 60, -17, 60, 17, 32, 36, -32, 36)
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="RigidBody2D" unique_id=207304984]
@@ -123,3 +148,5 @@ position = Vector2(54, -20)
 script = ExtResource("4_1bvp3")
 asteroid_scene = ExtResource("5_lquwl")
 player = NodePath("../RigidBody2D")
+
+[connection signal="body_entered" from="RigidBody2D" to="RigidBody2D" method="_on_body_entered"]
