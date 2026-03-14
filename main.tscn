@@ -11,9 +11,6 @@
 [ext_resource type="Script" uid="uid://dw5s7y606ubtt" path="res://game_over_screen.gd" id="4_efxa6"]
 [ext_resource type="PackedScene" uid="uid://c56qoa61cqbox" path="res://asteroid/asteroid.tscn" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://68kvlxjvcrto" path="res://player/spaceship_normal.png" id="6_kek77"]
-[ext_resource type="Texture2D" uid="uid://phkhni1thrmj" path="res://port/port.png" id="12_w48qg"]
-[ext_resource type="Texture2D" uid="uid://c2sl0gvrhhowa" path="res://port/port_normal.png" id="13_vivmo"]
-[ext_resource type="Texture2D" uid="uid://pv7ujv2fjijw" path="res://port/port_specular.png" id="14_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://d30pwbrwc6bii" path="res://light_gradient.tres" id="16_yaehf"]
 
 [sub_resource type="Animation" id="Animation_dg77c"]
@@ -417,10 +414,19 @@ _data = {
 &"die": SubResource("Animation_kek77")
 }
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_yaehf"]
-diffuse_texture = ExtResource("12_w48qg")
-normal_texture = ExtResource("13_vivmo")
-specular_texture = ExtResource("14_2cqfq")
+[sub_resource type="CircleShape2D" id="CircleShape2D_dg77c"]
+radius = 384.0
+
+[sub_resource type="Gradient" id="Gradient_dg77c"]
+offsets = PackedFloat32Array(0, 0.44190475, 0.4495238)
+colors = PackedColorArray(1, 1, 1, 0, 0, 1, 0, 0.105882354, 0.39215687, 0.39215687, 0.39215687, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ycdy4"]
+gradient = SubResource("Gradient_dg77c")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Node2D" type="Node2D" unique_id=2012011173]
 
@@ -559,7 +565,7 @@ player = NodePath("../Player")
 rotation = -0.49392816
 scale = Vector2(4, 4)
 color = Color(0.33333334, 0.4627451, 0.4627451, 1)
-energy = 0.1
+energy = 0.5
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 shadow_filter = 1
@@ -569,12 +575,11 @@ shadow_filter_smooth = 6.2
 rotation = 3.1345527
 scale = Vector2(4, 4)
 color = Color(0.33333334, 0.4627451, 0.4627451, 1)
-energy = 0.2
+energy = 0.5
 blend_mode = 1
 height = 0.5
 
 [node name="Player" type="RigidBody2D" parent="." unique_id=2006633837 groups=["player"]]
-position = Vector2(0, -320)
 mass = 400.0
 gravity_scale = 0.0
 max_contacts_reported = 1
@@ -662,16 +667,22 @@ texture = ExtResource("16_yaehf")
 height = 10.0
 metadata/_edit_lock_ = true
 
-[node name="Port" type="StaticBody2D" parent="." unique_id=1653838013]
+[node name="StartArea" type="Area2D" parent="." unique_id=1028840250]
 
-[node name="Sprite" type="Sprite2D" parent="Port" unique_id=1188225892]
-z_index = 1
-scale = Vector2(8, 8)
-texture = SubResource("CanvasTexture_yaehf")
-metadata/_edit_lock_ = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartArea" unique_id=1895155092]
+visible = false
+shape = SubResource("CircleShape2D_dg77c")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Port" unique_id=1563149117]
-polygon = PackedVector2Array(-192, -232, -240, -184, -240, 208, -192, 256, 192, 256, 240, 208, 240, -184, 192, -232)
+[node name="Sprite2D" type="Sprite2D" parent="StartArea" unique_id=38400572]
+scale = Vector2(2.375, 2.3749998)
+texture = SubResource("GradientTexture2D_ycdy4")
+
+[node name="PointLight2D" type="PointLight2D" parent="StartArea" unique_id=925488311]
+scale = Vector2(13, 13.000002)
+color = Color(0, 1, 0, 1)
+energy = 0.41
+texture = ExtResource("16_yaehf")
+height = 120.0
 
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
 [connection signal="game_over" from="Player" to="CanvasLayer/Control/GameOver" method="show_game_over"]
