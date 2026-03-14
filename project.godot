@@ -68,6 +68,10 @@ fire={
 ]
 }
 
+[layer_names]
+
+2d_render/layer_1="World"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
@@ -81,4 +85,3 @@ common/physics_interpolation=true
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="mobile"
