@@ -3,7 +3,7 @@ extends RigidBody2D
 const THRUST = 40000.0
 const TORQUE = 700000.0
 
-@export var max_health = 100.0
+@export var max_health = 50.0
 var health = max_health
 
 var controllable = true

@@ -21,6 +21,7 @@ scale_max = 21.68
 [sub_resource type="CanvasTexture" id="CanvasTexture_iic4w"]
 diffuse_texture = ExtResource("2_ow88a")
 normal_texture = ExtResource("3_kkysg")
+specular_shininess = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kkysg"]
 radius = 97.020615
