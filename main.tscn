@@ -659,13 +659,12 @@ libraries/ = SubResource("AnimationLibrary_4c57u")
 autoplay = &"RESET"
 
 [node name="FlameLight" type="PointLight2D" parent="Player" unique_id=500096361]
-position = Vector2(-3.8146973e-06, 42)
+position = Vector2(1.1920929e-07, 40)
 scale = Vector2(4.5625, 5.0625)
 color = Color(1, 0.6156863, 0.07058824, 1)
 shadow_enabled = true
 texture = ExtResource("16_yaehf")
 height = 10.0
-metadata/_edit_lock_ = true
 
 [node name="StartArea" type="Area2D" parent="." unique_id=1028840250]
 
