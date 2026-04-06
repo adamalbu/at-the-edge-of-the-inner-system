@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cfdhlvj5ekjnb"]
+
+[ext_resource type="PackedScene" uid="uid://lyj6d52qayy3" path="res://stars_parallax.tscn" id="1_3t44x"]
+[ext_resource type="Script" uid="uid://bkq2ikueriv4m" path="res://upgrade/motion.gd" id="2_00dis"]
+[ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://player/spaceship.png" id="2_mseo7"]
+[ext_resource type="Texture2D" uid="uid://68kvlxjvcrto" path="res://player/spaceship_normal.png" id="3_00dis"]
+[ext_resource type="Texture2D" uid="uid://d30pwbrwc6bii" path="res://light_gradient.tres" id="4_2wegb"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_6h2i3"]
+diffuse_texture = ExtResource("2_mseo7")
+normal_texture = ExtResource("3_00dis")
+texture_filter = 1
+
+[node name="UpgradeUi" type="Control" unique_id=843940651]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=1725276347]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1916434791]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.678125
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+stretch = true
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1123827538]
+handle_input_locally = false
+size = Vector2i(618, 1080)
+render_target_update_mode = 4
+
+[node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=27397315]
+
+[node name="Parallax2D" parent="SubViewportContainer/SubViewport/Node2D" unique_id=1699268475 instance=ExtResource("1_3t44x")]
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Node2D" unique_id=541480312]
+position = Vector2(313, 467)
+scale = Vector2(4, 4)
+texture = SubResource("CanvasTexture_6h2i3")
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/Node2D" unique_id=751394886]
+position = Vector2(313, 467)
+script = ExtResource("2_00dis")
+
+[node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport/Node2D/Camera2D" unique_id=1013973909]
+position = Vector2(-3, -225)
+color = Color(0.047058824, 0.8392157, 0.007843138, 1)
+energy = 1.15
+texture = ExtResource("4_2wegb")
+texture_scale = 17.12
+height = 29.0

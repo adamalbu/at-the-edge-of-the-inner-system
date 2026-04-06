@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://lyj6d52qayy3"]
+
+[ext_resource type="Texture2D" uid="uid://cp1l3ql8b6gvt" path="res://stars.png" id="1_pwd8s"]
+
+[node name="Parallax2D" type="Parallax2D" unique_id=1699268475]
+scroll_offset = Vector2(5158, 659)
+repeat_size = Vector2(3840, 2160)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1815203252]
+position = Vector2(578, 322)
+scale = Vector2(2.24, 2.24)
+texture = ExtResource("1_pwd8s")
+metadata/_edit_lock_ = true

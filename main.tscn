@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cbrd5uthhsyjh"]
 
 [ext_resource type="Script" uid="uid://lvu0ttrm562g" path="res://ui.gd" id="1_272bh"]
-[ext_resource type="Texture2D" uid="uid://cp1l3ql8b6gvt" path="res://stars.png" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://v57jqm0nfxgs" path="res://player/player.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://dqr17jgpm5w68" path="res://player/healthbar.gd" id="2_5vw27"]
 [ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://player/spaceship.png" id="2_h2yge"]
@@ -9,6 +8,7 @@
 [ext_resource type="Script" uid="uid://uf6mdh0rpmsr" path="res://asteroid/spawn_asteroids.gd" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://b6d6ipar2ppvm" path="res://player/laser.gd" id="4_7mycd"]
 [ext_resource type="Script" uid="uid://dw5s7y606ubtt" path="res://game_over_screen.gd" id="4_efxa6"]
+[ext_resource type="PackedScene" uid="uid://lyj6d52qayy3" path="res://stars_parallax.tscn" id="5_dg77c"]
 [ext_resource type="PackedScene" uid="uid://c56qoa61cqbox" path="res://asteroid/asteroid.tscn" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://68kvlxjvcrto" path="res://player/spaceship_normal.png" id="6_kek77"]
 [ext_resource type="Texture2D" uid="uid://d30pwbrwc6bii" path="res://light_gradient.tres" id="16_yaehf"]
@@ -545,16 +545,8 @@ root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_dg77c")
 autoplay = &"RESET"
 
-[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1428591634]
-scroll_offset = Vector2(5158, 659)
-repeat_size = Vector2(3840, 2160)
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=883747782]
-position = Vector2(578, 322)
-scale = Vector2(2.24, 2.24)
-texture = ExtResource("1_h2yge")
-metadata/_edit_lock_ = true
+[node name="Parallax2D" parent="." unique_id=1699268475 instance=ExtResource("5_dg77c")]
+scroll_offset = Vector2(3509, 1759)
 
 [node name="AsteroidManager" type="Node" parent="." unique_id=33070321 node_paths=PackedStringArray("player")]
 script = ExtResource("4_1bvp3")
