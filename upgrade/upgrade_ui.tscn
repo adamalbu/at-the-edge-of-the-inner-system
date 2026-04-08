@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cfdhlvj5ekjnb"]
 
 [ext_resource type="PackedScene" uid="uid://lyj6d52qayy3" path="res://stars_parallax.tscn" id="1_3t44x"]
+[ext_resource type="Script" uid="uid://bh8hxcsr1jq3e" path="res://upgrade/side_panel.gd" id="1_egnfe"]
 [ext_resource type="Script" uid="uid://bkq2ikueriv4m" path="res://upgrade/motion.gd" id="2_00dis"]
 [ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://player/spaceship.png" id="2_mseo7"]
 [ext_resource type="Texture2D" uid="uid://68kvlxjvcrto" path="res://player/spaceship_normal.png" id="3_00dis"]
@@ -41,6 +42,7 @@ anchor_bottom = 1.0
 offset_left = -616.0
 grow_horizontal = 0
 grow_vertical = 2
+script = ExtResource("1_egnfe")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="SidePanel" unique_id=1916434791]
 layout_mode = 1
@@ -135,7 +137,7 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="Button" parent="UpgradeTree" unique_id=172316452 instance=ExtResource("6_00dis")]
+[node name="Button" parent="UpgradeTree" unique_id=172316452 node_paths=PackedStringArray("side_panel") instance=ExtResource("6_00dis")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.24577573
@@ -147,6 +149,9 @@ offset_top = 0.0
 offset_right = 192.0
 offset_bottom = 64.0
 text = "Sustained"
+title = "Sustained"
+description = "A continuous beam that steadily chews through rock"
+side_panel = NodePath("../../SidePanel")
 metadata/_edit_use_anchors_ = true
 
 [node name="Line" parent="UpgradeTree" unique_id=708418238 instance=ExtResource("7_2wegb")]
@@ -156,7 +161,7 @@ points = PackedVector2Array(416, 192, 416, 96, 736, 96, 736, 192)
 points = PackedVector2Array(576, 96, 576, 32)
 end_cap_mode = 2
 
-[node name="Button2" parent="UpgradeTree" unique_id=702046802 instance=ExtResource("6_00dis")]
+[node name="Button2" parent="UpgradeTree" unique_id=702046802 node_paths=PackedStringArray("side_panel") instance=ExtResource("6_00dis")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.49155146
@@ -168,4 +173,9 @@ offset_top = 0.0
 offset_right = 192.0
 offset_bottom = 64.0
 text = "Burst"
+title = "Burst"
+description = "Charges up and fires a single concentrated impact that punches through rock"
+side_panel = NodePath("../../SidePanel")
 metadata/_edit_use_anchors_ = true
+
+[connection signal="mouse_entered" from="UpgradeTree/Button" to="SidePanel" method="_on_button_mouse_entered"]
