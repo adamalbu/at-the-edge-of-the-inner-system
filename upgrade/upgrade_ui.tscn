@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://player/spaceship.png" id="2_mseo7"]
 [ext_resource type="Texture2D" uid="uid://68kvlxjvcrto" path="res://player/spaceship_normal.png" id="3_00dis"]
 [ext_resource type="Texture2D" uid="uid://d30pwbrwc6bii" path="res://light_gradient.tres" id="4_2wegb"]
+[ext_resource type="PackedScene" uid="uid://cyw26up2867rj" path="res://upgrade/upgrade_button.tscn" id="6_00dis"]
+[ext_resource type="PackedScene" uid="uid://dhfb23cicd2un" path="res://upgrade/line.tscn" id="7_2wegb"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_6h2i3"]
 diffuse_texture = ExtResource("2_mseo7")
@@ -18,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="." unique_id=1725276347]
 layout_mode = 1
@@ -29,39 +32,140 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1916434791]
+[node name="SidePanel" type="Panel" parent="." unique_id=1537101342]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.678125
+anchors_preset = 11
+anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -616.0
 grow_horizontal = 0
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="SidePanel" unique_id=1916434791]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1123827538]
+[node name="SubViewport" type="SubViewport" parent="SidePanel/SubViewportContainer" unique_id=1123827538]
 handle_input_locally = false
-size = Vector2i(618, 1080)
+size = Vector2i(616, 1080)
 render_target_update_mode = 4
 
-[node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=27397315]
+[node name="Node2D" type="Node2D" parent="SidePanel/SubViewportContainer/SubViewport" unique_id=27397315]
 
-[node name="Parallax2D" parent="SubViewportContainer/SubViewport/Node2D" unique_id=1699268475 instance=ExtResource("1_3t44x")]
+[node name="Parallax2D" parent="SidePanel/SubViewportContainer/SubViewport/Node2D" unique_id=1699268475 instance=ExtResource("1_3t44x")]
 
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Node2D" unique_id=541480312]
+[node name="Sprite2D" type="Sprite2D" parent="SidePanel/SubViewportContainer/SubViewport/Node2D" unique_id=541480312]
 position = Vector2(313, 467)
 scale = Vector2(4, 4)
 texture = SubResource("CanvasTexture_6h2i3")
 
-[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/Node2D" unique_id=751394886]
+[node name="Camera2D" type="Camera2D" parent="SidePanel/SubViewportContainer/SubViewport/Node2D" unique_id=751394886]
 position = Vector2(313, 467)
 script = ExtResource("2_00dis")
 
-[node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport/Node2D/Camera2D" unique_id=1013973909]
+[node name="PointLight2D" type="PointLight2D" parent="SidePanel/SubViewportContainer/SubViewport/Node2D/Camera2D" unique_id=1013973909]
 position = Vector2(-3, -225)
 color = Color(0.047058824, 0.8392157, 0.007843138, 1)
 energy = 1.15
 texture = ExtResource("4_2wegb")
 texture_scale = 17.12
 height = 29.0
+
+[node name="BackgroundMargin" type="MarginContainer" parent="SidePanel" unique_id=423792097]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Background" type="ColorRect" parent="SidePanel/BackgroundMargin" unique_id=1926589433]
+layout_mode = 2
+color = Color(0.16078432, 0.16078432, 0.16078432, 0.4627451)
+
+[node name="TextMargin" type="MarginContainer" parent="SidePanel" unique_id=1998702690]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Texts" type="VBoxContainer" parent="SidePanel/TextMargin" unique_id=1943750295]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SidePanel/TextMargin/Texts" unique_id=1552109239]
+custom_minimum_size = Vector2(30, 10)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 44
+text = "Lorem Ipsum"
+
+[node name="Description" type="Label" parent="SidePanel/TextMargin/Texts" unique_id=1800738043]
+custom_minimum_size = Vector2(30, 10)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 21
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+horizontal_alignment = 3
+autowrap_mode = 2
+
+[node name="UpgradeTree" type="Panel" parent="." unique_id=337155546]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.6791667
+anchor_bottom = 1.0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="Button" parent="UpgradeTree" unique_id=172316452 instance=ExtResource("6_00dis")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24577573
+anchor_top = 0.17777778
+anchor_right = 0.24577573
+anchor_bottom = 0.17777778
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 192.0
+offset_bottom = 64.0
+text = "Sustained"
+metadata/_edit_use_anchors_ = true
+
+[node name="Line" parent="UpgradeTree" unique_id=708418238 instance=ExtResource("7_2wegb")]
+points = PackedVector2Array(416, 192, 416, 96, 736, 96, 736, 192)
+
+[node name="Line2" parent="UpgradeTree" unique_id=45965539 instance=ExtResource("7_2wegb")]
+points = PackedVector2Array(576, 96, 576, 32)
+end_cap_mode = 2
+
+[node name="Button2" parent="UpgradeTree" unique_id=702046802 instance=ExtResource("6_00dis")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49155146
+anchor_top = 0.17777778
+anchor_right = 0.49155146
+anchor_bottom = 0.17777778
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 192.0
+offset_bottom = 64.0
+text = "Burst"
+metadata/_edit_use_anchors_ = true
