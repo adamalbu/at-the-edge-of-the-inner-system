@@ -20,6 +20,9 @@ func _ready() -> void:
 	self.text = self.title
 	$Price.text = "₡" + str(self.price)
 	self.tree_parent = self.find_parent(tree_parent_name)
+	
+	if self.dependency != null:
+		self.visible = false
 
 func _on_mouse_entered() -> void:
 	if self.disabled:

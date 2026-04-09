@@ -10,7 +10,5 @@ func _process(delta: float) -> void:
 		if self.exclude_if != null and self.exclude_if.bought:
 			self.disabled = true
 			
-		if self.dependency != null and not self.dependency.bought:
-			self.visible = false
-		else:
+		if self.dependency != null and self.dependency.bought:
 			self.visible = true

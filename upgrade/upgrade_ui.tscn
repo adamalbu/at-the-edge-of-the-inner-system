@@ -404,7 +404,6 @@ price = 10
 exclude_if = NodePath("../../Burst/Burst")
 
 [node name="Thing" parent="UpgradeTree/Tree/Sustained" unique_id=909589663 node_paths=PackedStringArray("dependency") instance=ExtResource("6_00dis")]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 8.0
