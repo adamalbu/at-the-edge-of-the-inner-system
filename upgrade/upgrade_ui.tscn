@@ -9,17 +9,218 @@
 [ext_resource type="Texture2D" uid="uid://d30pwbrwc6bii" path="res://light_gradient.tres" id="4_2wegb"]
 [ext_resource type="PackedScene" uid="uid://cyw26up2867rj" path="res://upgrade/upgrade_button.tscn" id="6_00dis"]
 [ext_resource type="PackedScene" uid="uid://dhfb23cicd2un" path="res://upgrade/line.tscn" id="7_2wegb"]
+[ext_resource type="Script" uid="uid://c33kwpfsf3dti" path="res://upgrade/upgrade_tree.gd" id="8_hcaxd"]
 [ext_resource type="Script" uid="uid://ca25ac8bu2nqb" path="res://upgrade/coins_label.gd" id="10_grdk4"]
-
-[sub_resource type="Theme" id="Theme_grdk4"]
-Label/fonts/font = ExtResource("1_jbcn4")
-Label/styles/focus = null
-Label/styles/normal = null
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_6h2i3"]
 diffuse_texture = ExtResource("2_mseo7")
 normal_texture = ExtResource("3_00dis")
 texture_filter = 1
+
+[sub_resource type="Animation" id="Animation_grdk4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextMargin/Texts/Description:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextMargin/Texts/Title:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_hcaxd"]
+resource_name = "text_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextMargin/Texts/Description:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextMargin/Texts/Title:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pqxqm"]
+_data = {
+&"RESET": SubResource("Animation_grdk4"),
+&"text_in": SubResource("Animation_hcaxd")
+}
+
+[sub_resource type="Animation" id="Animation_pqxqm"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Coins:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(14, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Coins:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Coins:modulate:r")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Coins:modulate:g")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Coins:modulate:b")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Coins:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_pv3j5"]
+resource_name = "not_enough"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Coins:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(14, -0.011666667, 0, 0.155, 0, 14, -0.16666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Coins:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(18, -0.011666667, 0, 0.155, 0, 0, -0.16666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Coins:modulate:r")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(1, 0, 0, 0.16666667, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Coins:modulate:g")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0.19999999, 0, 0, 0.16666667, 0.13333334, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Coins:modulate:b")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0.22666663, 0, 0, 0.16666667, 0.1288889, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Coins:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(1, 0, 0, 0.16666667, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6g4si"]
+_data = {
+&"RESET": SubResource("Animation_pqxqm"),
+&"not_enough": SubResource("Animation_pv3j5")
+}
 
 [node name="UpgradeUi" type="Control" unique_id=843940651]
 layout_mode = 3
@@ -28,7 +229,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_grdk4")
 metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="." unique_id=1725276347]
@@ -127,68 +327,89 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 44
 text = "Lorem Ipsum"
 
-[node name="Description" type="Label" parent="SidePanel/TextMargin/Texts" unique_id=1800738043]
+[node name="Description" type="RichTextLabel" parent="SidePanel/TextMargin/Texts" unique_id=189886494]
 custom_minimum_size = Vector2(30, 10)
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 21
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-horizontal_alignment = 3
-autowrap_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_jbcn4")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-[node name="UpgradeTree" type="Panel" parent="." unique_id=337155546]
+[left][b]Bold Text[/b][/left]"
+fit_content = true
+autowrap_mode = 2
+horizontal_alignment = 3
+visible_characters_behavior = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SidePanel" unique_id=298766593]
+libraries/ = SubResource("AnimationLibrary_pqxqm")
+
+[node name="UpgradeTree" type="Control" parent="." unique_id=1310215151 node_paths=PackedStringArray("side_panel", "animation_player")]
+anchors_preset = 0
+offset_right = 1304.0
+offset_bottom = 1083.0
+script = ExtResource("8_hcaxd")
+side_panel = NodePath("../SidePanel")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="Tree" type="Panel" parent="UpgradeTree" unique_id=337155546]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.6791667
+anchor_right = 1.0
 anchor_bottom = 1.0
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
-[node name="Button" parent="UpgradeTree" unique_id=172316452 node_paths=PackedStringArray("side_panel") instance=ExtResource("6_00dis")]
+[node name="Sustained" parent="UpgradeTree/Tree" unique_id=172316452 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.24577573
-anchor_top = 0.17777778
-anchor_right = 0.24577573
-anchor_bottom = 0.17777778
+anchor_left = 0.24539877
+anchor_top = 0.1772853
+anchor_right = 0.24539877
+anchor_bottom = 0.1772853
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 192.0
 offset_bottom = 64.0
 text = "Sustained"
 title = "Sustained"
-description = "A continuous beam that steadily chews through rock"
+description = "A continuous beam that steadily chews through rock
+
+[left][b]Mutually exclusive with [i]Burst[/i][/b][/left]"
 price = 10
-side_panel = NodePath("../../SidePanel")
+exclude_if = NodePath("../Burst")
 metadata/_edit_use_anchors_ = true
 
-[node name="Line" parent="UpgradeTree" unique_id=708418238 instance=ExtResource("7_2wegb")]
+[node name="Line" parent="UpgradeTree/Tree" unique_id=708418238 instance=ExtResource("7_2wegb")]
 points = PackedVector2Array(416, 192, 416, 96, 736, 96, 736, 192)
 
-[node name="Line2" parent="UpgradeTree" unique_id=45965539 instance=ExtResource("7_2wegb")]
+[node name="Line2" parent="UpgradeTree/Tree" unique_id=45965539 instance=ExtResource("7_2wegb")]
 points = PackedVector2Array(576, 96, 576, 32)
 end_cap_mode = 2
 
-[node name="Button2" parent="UpgradeTree" unique_id=702046802 node_paths=PackedStringArray("side_panel") instance=ExtResource("6_00dis")]
+[node name="Burst" parent="UpgradeTree/Tree" unique_id=702046802 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.49155146
-anchor_top = 0.17777778
-anchor_right = 0.49155146
-anchor_bottom = 0.17777778
+anchor_left = 0.49079755
+anchor_top = 0.1772853
+anchor_right = 0.49079755
+anchor_bottom = 0.1772853
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 192.0
 offset_bottom = 64.0
 text = "Burst"
 title = "Burst"
-description = "Charges up and fires a single concentrated impact that punches through rock"
+description = "Charges up and fires a single concentrated impact that punches through rock
+
+[left][b]Mutually exclusive with [i]Sustained[/i][/b][/left]"
 price = 10
-side_panel = NodePath("../../SidePanel")
+exclude_if = NodePath("../Sustained")
 metadata/_edit_use_anchors_ = true
 
-[node name="Coins" type="Label" parent="." unique_id=720799131]
+[node name="Coins" type="Label" parent="UpgradeTree" unique_id=720799131]
 layout_mode = 0
 offset_left = 14.0
 offset_right = 294.0
@@ -197,4 +418,7 @@ theme_override_font_sizes/font_size = 57
 text = "₡?"
 script = ExtResource("10_grdk4")
 
-[connection signal="mouse_entered" from="UpgradeTree/Button" to="SidePanel" method="_on_button_mouse_entered"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UpgradeTree" unique_id=1717636231]
+libraries/ = SubResource("AnimationLibrary_6g4si")
+
+[connection signal="mouse_entered" from="UpgradeTree/Tree/Sustained" to="SidePanel" method="_on_button_mouse_entered"]

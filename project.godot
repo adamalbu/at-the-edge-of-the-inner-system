@@ -40,6 +40,10 @@ folder_colors={
 "res://outputs/": "gray"
 }
 
+[gui]
+
+theme/custom_font="uid://71frbma8hwst"
+
 [input]
 
 forward={
