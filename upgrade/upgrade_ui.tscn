@@ -2,12 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://lyj6d52qayy3" path="res://stars_parallax.tscn" id="1_3t44x"]
 [ext_resource type="Script" uid="uid://bh8hxcsr1jq3e" path="res://upgrade/side_panel.gd" id="1_egnfe"]
+[ext_resource type="FontFile" uid="uid://71frbma8hwst" path="res://PixelifySans.ttf" id="1_jbcn4"]
 [ext_resource type="Script" uid="uid://bkq2ikueriv4m" path="res://upgrade/motion.gd" id="2_00dis"]
 [ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://player/spaceship.png" id="2_mseo7"]
 [ext_resource type="Texture2D" uid="uid://68kvlxjvcrto" path="res://player/spaceship_normal.png" id="3_00dis"]
 [ext_resource type="Texture2D" uid="uid://d30pwbrwc6bii" path="res://light_gradient.tres" id="4_2wegb"]
 [ext_resource type="PackedScene" uid="uid://cyw26up2867rj" path="res://upgrade/upgrade_button.tscn" id="6_00dis"]
 [ext_resource type="PackedScene" uid="uid://dhfb23cicd2un" path="res://upgrade/line.tscn" id="7_2wegb"]
+[ext_resource type="Script" uid="uid://ca25ac8bu2nqb" path="res://upgrade/coins_label.gd" id="10_grdk4"]
+
+[sub_resource type="Theme" id="Theme_grdk4"]
+Label/fonts/font = ExtResource("1_jbcn4")
+Label/styles/focus = null
+Label/styles/normal = null
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_6h2i3"]
 diffuse_texture = ExtResource("2_mseo7")
@@ -21,6 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_grdk4")
 metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="." unique_id=1725276347]
@@ -151,6 +159,7 @@ offset_bottom = 64.0
 text = "Sustained"
 title = "Sustained"
 description = "A continuous beam that steadily chews through rock"
+price = 10
 side_panel = NodePath("../../SidePanel")
 metadata/_edit_use_anchors_ = true
 
@@ -175,7 +184,17 @@ offset_bottom = 64.0
 text = "Burst"
 title = "Burst"
 description = "Charges up and fires a single concentrated impact that punches through rock"
+price = 10
 side_panel = NodePath("../../SidePanel")
 metadata/_edit_use_anchors_ = true
+
+[node name="Coins" type="Label" parent="." unique_id=720799131]
+layout_mode = 0
+offset_left = 14.0
+offset_right = 294.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 57
+text = "₡?"
+script = ExtResource("10_grdk4")
 
 [connection signal="mouse_entered" from="UpgradeTree/Button" to="SidePanel" method="_on_button_mouse_entered"]
