@@ -8,6 +8,7 @@ extends Button
 
 @export_category("Dependencies")
 @export var exclude_if: UpgradeButton
+@export var dependency: UpgradeButton
 
 var bought = false
 
@@ -21,6 +22,9 @@ func _ready() -> void:
 	self.tree_parent = self.find_parent(tree_parent_name)
 
 func _on_mouse_entered() -> void:
+	if self.disabled:
+		return
+	
 	self.tree_parent.side_panel.show_text()
 	self.tree_parent.side_panel.set_title(self.title)
 	self.tree_parent.side_panel.set_description(self.description)

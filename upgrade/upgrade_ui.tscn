@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d30pwbrwc6bii" path="res://light_gradient.tres" id="4_2wegb"]
 [ext_resource type="PackedScene" uid="uid://cyw26up2867rj" path="res://upgrade/upgrade_button.tscn" id="6_00dis"]
 [ext_resource type="PackedScene" uid="uid://dhfb23cicd2un" path="res://upgrade/line.tscn" id="7_2wegb"]
-[ext_resource type="Script" uid="uid://c33kwpfsf3dti" path="res://upgrade/upgrade_tree.gd" id="8_hcaxd"]
+[ext_resource type="Script" path="res://upgrade/upgrade_tree.gd" id="8_hcaxd"]
 [ext_resource type="Script" uid="uid://ca25ac8bu2nqb" path="res://upgrade/coins_label.gd" id="10_grdk4"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_6h2i3"]
@@ -353,6 +353,7 @@ offset_bottom = 1083.0
 script = ExtResource("8_hcaxd")
 side_panel = NodePath("../SidePanel")
 animation_player = NodePath("AnimationPlayer")
+metadata/_edit_lock_ = true
 
 [node name="Tree" type="Panel" parent="UpgradeTree" unique_id=337155546]
 layout_mode = 1
@@ -361,26 +362,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
-
-[node name="Sustained" parent="UpgradeTree/Tree" unique_id=172316452 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.24539877
-anchor_top = 0.1772853
-anchor_right = 0.24539877
-anchor_bottom = 0.1772853
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 192.0
-offset_bottom = 64.0
-text = "Sustained"
-title = "Sustained"
-description = "A continuous beam that steadily chews through rock
-
-[left][b]Mutually exclusive with [i]Burst[/i][/b][/left]"
-price = 10
-exclude_if = NodePath("../Burst")
-metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Line" parent="UpgradeTree/Tree" unique_id=708418238 instance=ExtResource("7_2wegb")]
 points = PackedVector2Array(416, 192, 416, 96, 736, 96, 736, 192)
@@ -389,25 +371,58 @@ points = PackedVector2Array(416, 192, 416, 96, 736, 96, 736, 192)
 points = PackedVector2Array(576, 96, 576, 32)
 end_cap_mode = 2
 
-[node name="Burst" parent="UpgradeTree/Tree" unique_id=702046802 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
+[node name="Burst" type="Control" parent="UpgradeTree/Tree" unique_id=360643029]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Burst" parent="UpgradeTree/Tree/Burst" unique_id=702046802 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.49079755
-anchor_top = 0.1772853
-anchor_right = 0.49079755
-anchor_bottom = 0.1772853
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 192.0
-offset_bottom = 64.0
+offset_left = 640.0
+offset_right = 832.0
 text = "Burst"
 title = "Burst"
 description = "Charges up and fires a single concentrated impact that punches through rock
 
 [left][b]Mutually exclusive with [i]Sustained[/i][/b][/left]"
 price = 10
-exclude_if = NodePath("../Sustained")
+exclude_if = NodePath("../../Sustained/Sustained")
+
+[node name="Sustained" type="Control" parent="UpgradeTree/Tree" unique_id=424820811]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sustained" parent="UpgradeTree/Tree/Sustained" unique_id=172316452 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
+layout_mode = 1
+text = "Sustained"
+title = "Sustained"
+description = "A continuous beam that steadily chews through rock
+
+[left][b]Mutually exclusive with [i]Burst[/i][/b][/left]"
+price = 10
+exclude_if = NodePath("../../Burst/Burst")
+
+[node name="Thing" parent="UpgradeTree/Tree/Sustained" unique_id=909589663 node_paths=PackedStringArray("dependency") instance=ExtResource("6_00dis")]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 8.0
+anchor_top = 8.0
+anchor_right = 8.0
+anchor_bottom = 8.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 192.0
+offset_bottom = 64.0
+text = "Thing"
+title = "Thing"
+price = 10
+dependency = NodePath("../Sustained")
 metadata/_edit_use_anchors_ = true
+
+[node name="Line" parent="UpgradeTree/Tree/Sustained/Thing" unique_id=1856004714 instance=ExtResource("7_2wegb")]
+points = PackedVector2Array(96, -64, 96, 0)
 
 [node name="Coins" type="Label" parent="UpgradeTree" unique_id=720799131]
 layout_mode = 0
@@ -417,8 +432,9 @@ offset_bottom = 69.0
 theme_override_font_sizes/font_size = 57
 text = "₡?"
 script = ExtResource("10_grdk4")
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UpgradeTree" unique_id=1717636231]
 libraries/ = SubResource("AnimationLibrary_6g4si")
 
-[connection signal="mouse_entered" from="UpgradeTree/Tree/Sustained" to="SidePanel" method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="UpgradeTree/Tree/Sustained/Sustained" to="SidePanel" method="_on_button_mouse_entered"]

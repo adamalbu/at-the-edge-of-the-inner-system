@@ -7,5 +7,10 @@ func _process(delta: float) -> void:
 		self.text = self.title
 		$Price.text = "₡" + str(self.price)
 	else:
-		if exclude_if.bought:
+		if self.exclude_if != null and self.exclude_if.bought:
 			self.disabled = true
+			
+		if self.dependency != null and not self.dependency.bought:
+			self.visible = false
+		else:
+			self.visible = true
