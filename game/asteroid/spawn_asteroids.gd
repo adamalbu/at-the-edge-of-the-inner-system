@@ -15,7 +15,7 @@ var noise = FastNoiseLite.new()
 
 var loaded_chunks: Dictionary = {}
 
-var destroyed_asteroids: Dictionary = {}
+
 
 func _ready():
 	noise.seed = 621
@@ -60,7 +60,7 @@ func spawn_chunk(chunk):
 			if value >= SPAWN_THRESHOLD:
 				var world_pos = Vector2i(base.x + x, base.y + y)
 				# TODO: Better way to do this
-				if world_pos in destroyed_asteroids:
+				if world_pos in GameState.destroyed_asteroids:
 					continue
 
 				var asteroid: RigidBody2D = asteroid_scene.instantiate()
@@ -83,7 +83,7 @@ func despawn_chunk(chunk):
 	loaded_chunks.erase(chunk)
 
 func _on_asteroid_destroyed(asteroid):
-	destroyed_asteroids[asteroid.id] = true
+	GameState.destroyed_asteroids[asteroid.id] = true
 	for chunk in loaded_chunks:
 		var list = loaded_chunks[chunk]
 		var i = list.find(asteroid)

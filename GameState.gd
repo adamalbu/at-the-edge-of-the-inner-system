@@ -1,5 +1,7 @@
 extends Node
 
+var destroyed_asteroids: Dictionary = {}
+
 enum DrillType {SUSTAINED, BURST}
 
 var upgrades: Dictionary[String, int] = {}
