@@ -9,6 +9,10 @@ var dead = false
 
 signal game_over
 
+func _ready() -> void:
+	self.angular_damp = GameState.angular_damp
+	self.linear_damp = GameState.linear_damp
+
 func _draw() -> void:
 	draw_circle(to_local(position), laser_range, Color.GREEN, false)
 

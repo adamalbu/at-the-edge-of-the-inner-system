@@ -392,44 +392,21 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_pv3j5")
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="Burst" parent="UpgradeTree/Tree" unique_id=702046802 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
-layout_mode = 1
-offset_left = 1024.0
-offset_right = 1216.0
-text = "Burst"
-title = "Burst"
-description = "Charges up and fires a single concentrated impact that punches through rock
-
-[left][b]Mutually exclusive with [i]Sustained[/i][/b][/left]"
-price = 10
-price_multiplier = 1.0
-exclude_if = NodePath("../Sustained")
-
-[node name="Sustained" parent="UpgradeTree/Tree" unique_id=172316452 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
-layout_mode = 1
-offset_left = 768.0
-offset_right = 960.0
-text = "Sustained"
-title = "Sustained"
-description = "A continuous beam that steadily chews through rock
-
-[left][b]Mutually exclusive with [i]Burst[/i][/b][/left]"
-price = 10
-price_multiplier = 1.0
-exclude_if = NodePath("../Burst")
-
 [node name="Torque" parent="UpgradeTree/Tree" unique_id=1454377952 instance=ExtResource("6_00dis")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -1.3333334
+anchor_top = 0.00092336105
 anchor_right = -1.3333334
+anchor_bottom = 0.00092336105
 offset_left = 1866.6667
 offset_right = 2058.6667
 text = "Torque"
 title = "Torque"
-description = "[b]Doubles[/b] the ship's torque (turning speed)"
+description = "Increases the ship's torque for faster turning"
 price = 10
-max_level = 5
+max_level = 10
+inherit_max_level = null
 metadata/_edit_use_anchors_ = true
 
 [node name="Gyroscope" parent="UpgradeTree/Tree/Torque" unique_id=388499834 node_paths=PackedStringArray("dependency") instance=ExtResource("6_00dis")]
@@ -440,9 +417,11 @@ offset_right = 192.0
 offset_bottom = 192.0
 text = "Gyroscope"
 title = "Gyroscope"
+description = "Increses the dampening of turning, making turning slightly slower but allowing for faster stopping."
 price = 20
-max_level = 5
+max_level = 10
 dependency = NodePath("..")
+inherit_max_level = true
 
 [node name="Thrust" parent="UpgradeTree/Tree" unique_id=1103205459 instance=ExtResource("6_00dis")]
 layout_mode = 1
@@ -457,9 +436,10 @@ offset_right = 192.0
 offset_bottom = 64.0
 text = "Thrust"
 title = "Thrust"
-description = "Increases the ship's thrust (movement speed) by [b]+10%[/b]"
+description = "Increses the ship's thrust for faster movment"
 price = 10
-max_level = 5
+max_level = 10
+inherit_max_level = null
 metadata/_edit_use_anchors_ = true
 
 [node name="Stabilizers" parent="UpgradeTree/Tree/Thrust" unique_id=2122178803 node_paths=PackedStringArray("dependency") instance=ExtResource("6_00dis")]
@@ -470,18 +450,20 @@ offset_right = 192.0
 offset_bottom = 192.0
 text = "Stabilizers"
 title = "Stabilizers"
+description = "Increses the dampening of turning, making moving slightly slower but allowing for faster stopping."
 price = 20
-max_level = 5
+max_level = 10
 dependency = NodePath("..")
+inherit_max_level = true
 
 [node name="Lines" type="Node" parent="UpgradeTree/Tree" unique_id=532555137]
 
 [node name="Line" parent="UpgradeTree/Tree/Lines" unique_id=495779584 instance=ExtResource("12_pv3j5")]
-position = Vector2(672, 64)
+position = Vector2(352, 64)
 points = PackedVector2Array(0, 0, 0, 64)
 
 [node name="Main" parent="UpgradeTree/Tree/Lines" unique_id=718771093 instance=ExtResource("12_pv3j5")]
-points = PackedVector2Array(224, 128, 1120, 128)
+points = PackedVector2Array(224, 128, 480, 128)
 
 [node name="Coins" type="Label" parent="UpgradeTree" unique_id=720799131]
 layout_mode = 0
@@ -497,4 +479,3 @@ metadata/_edit_lock_ = true
 libraries/ = SubResource("AnimationLibrary_6g4si")
 
 [connection signal="pressed" from="SidePanel/NewRun" to="SidePanel" method="_on_new_run_pressed"]
-[connection signal="mouse_entered" from="UpgradeTree/Tree/Sustained" to="SidePanel" method="_on_button_mouse_entered"]

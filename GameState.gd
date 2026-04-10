@@ -4,7 +4,7 @@ enum DrillType {SUSTAINED, BURST}
 
 var upgrades: Dictionary[String, int] = {}
 
-var money: int = 400
+var money: int = 10000
 var run_money: int = 0
 
 var drill_type = DrillType.SUSTAINED
@@ -12,8 +12,14 @@ var drill_type = DrillType.SUSTAINED
 const BASE_THRUST= 40000.0
 const BASE_TORQUE = 700000.0
 
-var thrust = 40000.0
-var torque = 700000.0
+const BASE_ANGULAR_DAMPENING = 0.0
+const BASE_LINEAR_DAMPENING = 0.0
+
+var thrust = BASE_THRUST
+var torque = BASE_TORQUE
+
+var angular_damp = BASE_ANGULAR_DAMPENING
+var linear_damp = BASE_LINEAR_DAMPENING
 
 func upgrade(upgrade_name: String) -> void:
 	if upgrades.has(upgrade_name):
@@ -43,4 +49,7 @@ func update_upgrade(upgrade_name: String) -> void:
 			thrust = BASE_THRUST * (1 + upgrades["Thrust"] * 0.1)
 		"Torque":
 			torque = BASE_TORQUE * (1 + upgrades["Torque"] * 1)
-			print(upgrades["Torque"])
+		"Gyroscope":
+			angular_damp = BASE_ANGULAR_DAMPENING + 0.5 * upgrades["Gyroscope"]
+		"Stabilizers":
+			linear_damp = BASE_LINEAR_DAMPENING + 0.5 * upgrades["Stabilizers"]

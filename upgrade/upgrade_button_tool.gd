@@ -1,16 +1,15 @@
 @tool
 extends "res://upgrade/upgrade_button.gd"
 
-
-
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
-		self.update_button()
-	else:
-		if self.exclude_if != null and self.exclude_if.is_maxed():
-			self.disabled = true
-			
-		if self.dependency != null and self.dependency.level >= self.dependency_min_level:
-			self.visible = true
-	
-	$Level.text = str(self.level) + "/" + str(self.max_level)
+		_refresh()
+		return
+
+	if exclude_if != null and exclude_if.is_maxed():
+		disabled = true
+
+	if dependency != null and dependency.level >= dependency_min_level:
+		visible = true
+
+	$Level.text = "%d/%d" % [level, current_max_level]

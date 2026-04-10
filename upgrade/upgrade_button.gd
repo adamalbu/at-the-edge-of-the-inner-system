@@ -5,7 +5,6 @@ extends Button
 @export var title: String = "..."
 @export_multiline var description: String = ""
 @export var price: int = 0
-
 @export var max_level: int = 1
 @export var price_multiplier: float = 2.0
 
@@ -13,59 +12,56 @@ extends Button
 @export var exclude_if: UpgradeButton
 @export var dependency: UpgradeButton
 @export var dependency_min_level: int = 1
+@export var inherit_max_level: bool = false
 
-var level = 0
-
-const tree_parent_name: String = "UpgradeTree"
-
+var current_max_level: int = 1
+var level: int = 0
 var tree_parent: UpgradeTree
 
-func update_button() -> void:
-	self.name = self.title
-	self.text = self.title
-	$Price.text = "₡" + str(self.price)
+func _ready() -> void:
+	level = GameState.get_upgrade_level(title)
+	tree_parent = find_parent("UpgradeTree")
 
-	self.tree_parent = self.find_parent(tree_parent_name)
-
-	if self.max_level <= 1:
-		$Level.visible = false
+	if dependency != null:
+		visible = false
+		current_max_level = dependency.level
+		dependency.pressed.connect(_on_dependency_pressed)
 	else:
-		$Level.visible = true
+		current_max_level = max_level
+
+	_refresh()
 
 func is_maxed() -> bool:
-	return self.max_level == self.level
+	return level >= current_max_level
 
-func _ready() -> void:
-	self.update_button()
+func _refresh() -> void:
+	text = title
+	$Price.text = "₡" + str(price)
+	$Level.visible = max_level > 1
 
-	self.level = GameState.get_upgrade_level(self.title)
-
-	if self.dependency != null:
-		self.visible = false
+func _on_dependency_pressed() -> void:
+	current_max_level = dependency.level if inherit_max_level and dependency.level < max_level else max_level
+	disabled = is_maxed()
 
 func _on_mouse_entered() -> void:
-	if self.disabled:
+	if disabled:
 		return
-
-	self.tree_parent.side_panel.show_text()
-	self.tree_parent.side_panel.set_title(self.title)
-	self.tree_parent.side_panel.set_description(self.description)
+	tree_parent.side_panel.show_text()
+	tree_parent.side_panel.set_title(title)
+	tree_parent.side_panel.set_description(description)
 
 func _on_mouse_exited() -> void:
-	self.tree_parent.side_panel.hide_text()
+	tree_parent.side_panel.hide_text()
 
 func _on_pressed() -> void:
-	if self.price > GameState.money:
-		self.tree_parent.animation_player.stop()
-		self.tree_parent.animation_player.play("not_enough")
-	else:
-		self.level += 1
-		GameState.money -= self.price
+	if price > GameState.money:
+		tree_parent.animation_player.stop()
+		tree_parent.animation_player.play("not_enough")
+		return
 
-		if self.is_maxed():
-			self.disabled = true
-
-		GameState.upgrade(self.title)
-
-		self.price = round(self.price * self.price_multiplier)
-		self.update_button()
+	level += 1
+	GameState.money -= price
+	GameState.upgrade(title)
+	price = round(price * price_multiplier)
+	disabled = is_maxed()
+	_refresh()
