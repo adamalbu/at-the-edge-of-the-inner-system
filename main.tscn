@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://cm72b378wms2f" path="res://game/end_run.gd" id="5_w48qg"]
 [ext_resource type="Texture2D" uid="uid://68kvlxjvcrto" path="res://game/player/spaceship_normal.png" id="6_kek77"]
 [ext_resource type="Script" uid="uid://dsv5ef35u4ywr" path="res://game/start_area.gd" id="13_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://byr0ss10rhoml" path="res://game/player/spaceship_flame.png" id="14_yaehf"]
 [ext_resource type="Texture2D" uid="uid://d30pwbrwc6bii" path="res://light_gradient.tres" id="16_yaehf"]
 
 [sub_resource type="Animation" id="Animation_dg77c"]
@@ -171,6 +172,13 @@ scale_max = 8.42
 diffuse_texture = ExtResource("2_h2yge")
 normal_texture = ExtResource("6_kek77")
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_074og"]
+load_path = "res://.godot/imported/spaceship_normal.png-7a2be2b229850339a6c7d135931f2d79.ctex"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_cegan"]
+diffuse_texture = ExtResource("14_yaehf")
+normal_texture = SubResource("CompressedTexture2D_074og")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5vw27"]
 lifetime_randomness = 0.27
 particle_flag_disable_z = true
@@ -301,7 +309,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("FlameLight:visible")
+tracks/7/path = NodePath("PlayerFlameSprite/FlameLight:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -405,7 +413,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("FlameLight:visible")
+tracks/7/path = NodePath("PlayerFlameSprite/FlameLight:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -659,6 +667,19 @@ texture = SubResource("CanvasTexture_4c57u")
 region_rect = Rect2(0, 0, 27.710037, 24.971848)
 metadata/_edit_lock_ = true
 
+[node name="PlayerFlameSprite" type="Sprite2D" parent="Player" unique_id=489793713]
+visible = false
+scale = Vector2(4, 4)
+texture = SubResource("CanvasTexture_cegan")
+
+[node name="FlameLight" type="PointLight2D" parent="Player/PlayerFlameSprite" unique_id=500096361]
+position = Vector2(2.9802322e-08, 10)
+scale = Vector2(1.140625, 1.265625)
+color = Color(1, 0.6156863, 0.07058824, 1)
+shadow_enabled = true
+texture = ExtResource("16_yaehf")
+height = 10.0
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player" unique_id=525289533]
 visible = false
 polygon = PackedVector2Array(-60, 17, -60, -17, -9, -52, 10, -52, 60, -17, 60, 17, 32, 36, -32, 36)
@@ -716,14 +737,6 @@ height = 50.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player" unique_id=351209599]
 libraries/ = SubResource("AnimationLibrary_4c57u")
 autoplay = &"RESET"
-
-[node name="FlameLight" type="PointLight2D" parent="Player" unique_id=500096361]
-position = Vector2(1.1920929e-07, 40)
-scale = Vector2(4.5625, 5.0625)
-color = Color(1, 0.6156863, 0.07058824, 1)
-shadow_enabled = true
-texture = ExtResource("16_yaehf")
-height = 10.0
 
 [node name="StartArea" type="Area2D" parent="." unique_id=1028840250 node_paths=PackedStringArray("end_run_label")]
 script = ExtResource("13_ycdy4")

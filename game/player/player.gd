@@ -26,17 +26,21 @@ func _process(_delta: float) -> void:
 	queue_redraw()
 
 func _physics_process(_delta: float) -> void:
+	$PlayerFlameSprite.visible = false
+	
 	if !controllable:
 		return
 
 	var thrust = 0.0
 	if Input.is_action_pressed("forward"):
 		thrust -= GameState.thrust
+		$PlayerFlameSprite.visible = true
 	if Input.is_action_pressed("backwards"):
 		thrust += GameState.thrust
 
 	if thrust != 0.0:
 		apply_force(Vector2(0, thrust).rotated(rotation))
+		
 
 	var torque = 0.0
 	if Input.is_action_pressed("left"):
