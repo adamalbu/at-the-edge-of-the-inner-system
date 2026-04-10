@@ -3,3 +3,5 @@
 [node name="Line" type="Line2D" unique_id=708418238]
 width = 5.0
 default_color = Color(0.44291076, 0.44291076, 0.44291073, 1)
+begin_cap_mode = 2
+end_cap_mode = 2

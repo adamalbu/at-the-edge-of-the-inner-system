@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://c33kwpfsf3dti" path="res://upgrade/upgrade_tree.gd" id="8_hcaxd"]
 [ext_resource type="Theme" uid="uid://bkrncibuvpxtr" path="res://button.tres" id="9_pv3j5"]
 [ext_resource type="Script" uid="uid://ca25ac8bu2nqb" path="res://upgrade/coins_label.gd" id="10_grdk4"]
+[ext_resource type="PackedScene" uid="uid://dhfb23cicd2un" path="res://upgrade/line.tscn" id="12_pv3j5"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_6h2i3"]
 diffuse_texture = ExtResource("2_mseo7")
@@ -78,6 +79,8 @@ _data = {
 &"RESET": SubResource("Animation_grdk4"),
 &"text_in": SubResource("Animation_hcaxd")
 }
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pv3j5"]
 
 [sub_resource type="Animation" id="Animation_pqxqm"]
 length = 0.001
@@ -369,8 +372,8 @@ grow_vertical = 0
 theme = ExtResource("9_pv3j5")
 text = "New Run"
 
-[node name="UpgradeTree" type="Control" parent="." unique_id=1310215151 node_paths=PackedStringArray("side_panel", "animation_player")]
-anchors_preset = 0
+[node name="UpgradeTree" type="Panel" parent="." unique_id=877968250 node_paths=PackedStringArray("side_panel", "animation_player")]
+layout_mode = 0
 offset_right = 1304.0
 offset_bottom = 1083.0
 script = ExtResource("8_hcaxd")
@@ -379,20 +382,17 @@ animation_player = NodePath("AnimationPlayer")
 metadata/_edit_lock_ = true
 
 [node name="Tree" type="Panel" parent="UpgradeTree" unique_id=337155546]
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_pv3j5")
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="Burst" type="Control" parent="UpgradeTree/Tree" unique_id=360643029]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Burst" parent="UpgradeTree/Tree/Burst" unique_id=702046802 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
+[node name="Burst" parent="UpgradeTree/Tree" unique_id=702046802 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
 layout_mode = 1
 offset_left = 1024.0
 offset_right = 1216.0
@@ -402,14 +402,10 @@ description = "Charges up and fires a single concentrated impact that punches th
 
 [left][b]Mutually exclusive with [i]Sustained[/i][/b][/left]"
 price = 10
-exclude_if = NodePath("../../Sustained/Sustained")
+price_multiplier = 1.0
+exclude_if = NodePath("../Sustained")
 
-[node name="Sustained" type="Control" parent="UpgradeTree/Tree" unique_id=424820811]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Sustained" parent="UpgradeTree/Tree/Sustained" unique_id=172316452 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
+[node name="Sustained" parent="UpgradeTree/Tree" unique_id=172316452 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
 layout_mode = 1
 offset_left = 768.0
 offset_right = 960.0
@@ -419,7 +415,34 @@ description = "A continuous beam that steadily chews through rock
 
 [left][b]Mutually exclusive with [i]Burst[/i][/b][/left]"
 price = 10
-exclude_if = NodePath("../../Burst/Burst")
+price_multiplier = 1.0
+exclude_if = NodePath("../Burst")
+
+[node name="Torque" parent="UpgradeTree/Tree" unique_id=1454377952 instance=ExtResource("6_00dis")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.3333334
+anchor_right = -1.3333334
+offset_left = 1866.6667
+offset_right = 2058.6667
+text = "Torque"
+title = "Torque"
+description = "[b]Doubles[/b] the ship's torque (turning speed)"
+price = 10
+max_level = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Gyroscope" parent="UpgradeTree/Tree/Torque" unique_id=388499834 node_paths=PackedStringArray("dependency") instance=ExtResource("6_00dis")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 128.0
+offset_right = 192.0
+offset_bottom = 192.0
+text = "Gyroscope"
+title = "Gyroscope"
+price = 20
+max_level = 5
+dependency = NodePath("..")
 
 [node name="Thrust" parent="UpgradeTree/Tree" unique_id=1103205459 instance=ExtResource("6_00dis")]
 layout_mode = 1
@@ -434,11 +457,31 @@ offset_right = 192.0
 offset_bottom = 64.0
 text = "Thrust"
 title = "Thrust"
-description = "Increases the ship's thrust by [b]+10%[/b]"
+description = "Increases the ship's thrust (movement speed) by [b]+10%[/b]"
 price = 10
 max_level = 5
-price_multiplier = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="Stabilizers" parent="UpgradeTree/Tree/Thrust" unique_id=2122178803 node_paths=PackedStringArray("dependency") instance=ExtResource("6_00dis")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 128.0
+offset_right = 192.0
+offset_bottom = 192.0
+text = "Stabilizers"
+title = "Stabilizers"
+price = 20
+max_level = 5
+dependency = NodePath("..")
+
+[node name="Lines" type="Node" parent="UpgradeTree/Tree" unique_id=532555137]
+
+[node name="Line" parent="UpgradeTree/Tree/Lines" unique_id=495779584 instance=ExtResource("12_pv3j5")]
+position = Vector2(672, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+
+[node name="Main" parent="UpgradeTree/Tree/Lines" unique_id=718771093 instance=ExtResource("12_pv3j5")]
+points = PackedVector2Array(224, 128, 1120, 128)
 
 [node name="Coins" type="Label" parent="UpgradeTree" unique_id=720799131]
 layout_mode = 0
@@ -454,4 +497,4 @@ metadata/_edit_lock_ = true
 libraries/ = SubResource("AnimationLibrary_6g4si")
 
 [connection signal="pressed" from="SidePanel/NewRun" to="SidePanel" method="_on_new_run_pressed"]
-[connection signal="mouse_entered" from="UpgradeTree/Tree/Sustained/Sustained" to="SidePanel" method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="UpgradeTree/Tree/Sustained" to="SidePanel" method="_on_button_mouse_entered"]

@@ -1,8 +1,5 @@
 extends RigidBody2D
 
-const THRUST = 40000.0
-const TORQUE = 700000.0
-
 @export var max_health = 50.0
 @export var laser_range = 200.0
 var health = max_health
@@ -19,7 +16,7 @@ func _process(_delta: float) -> void:
 	if health <= 0 && !dead:
 		$AnimationPlayer.play("die")
 		dead = true
-	
+
 	queue_redraw()
 
 func _physics_process(_delta: float) -> void:
@@ -28,18 +25,18 @@ func _physics_process(_delta: float) -> void:
 
 	var thrust = 0.0
 	if Input.is_action_pressed("forward"):
-		thrust -= THRUST
+		thrust -= GameState.thrust
 	if Input.is_action_pressed("backwards"):
-		thrust += THRUST
+		thrust += GameState.thrust
 
 	if thrust != 0.0:
 		apply_force(Vector2(0, thrust).rotated(rotation))
 
 	var torque = 0.0
 	if Input.is_action_pressed("left"):
-		torque -= TORQUE
+		torque -= GameState.torque
 	if Input.is_action_pressed("right"):
-		torque += TORQUE
+		torque += GameState.torque
 
 	apply_torque(torque)
 

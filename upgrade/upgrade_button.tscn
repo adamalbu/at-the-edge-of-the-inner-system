@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://6si2ngn5a18f" path="res://upgrade/upgrade_button_tool.gd" id="1_d5r2m"]
 [ext_resource type="Theme" uid="uid://bkrncibuvpxtr" path="res://button.tres" id="1_unoka"]
+[ext_resource type="PackedScene" uid="uid://dhfb23cicd2un" path="res://upgrade/line.tscn" id="3_3wcsk"]
 
 [node name="___" type="Button" unique_id=172316452]
 offset_left = 320.0
@@ -13,6 +14,7 @@ text = "..."
 script = ExtResource("1_d5r2m")
 
 [node name="Level" type="Label" parent="." unique_id=2060337461]
+visible = false
 layout_mode = 0
 offset_left = 88.0
 offset_top = -24.0
@@ -29,6 +31,11 @@ offset_right = 64.0
 offset_bottom = 5.0
 theme_override_font_sizes/font_size = 23
 text = "₡0"
+
+[node name="Line" parent="." unique_id=708418238 instance=ExtResource("3_3wcsk")]
+z_index = -1
+position = Vector2(96, -64)
+points = PackedVector2Array(0, 0, 0, 64)
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
