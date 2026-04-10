@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cbrd5uthhsyjh"]
 
 [ext_resource type="Script" uid="uid://lvu0ttrm562g" path="res://ui.gd" id="1_272bh"]
+[ext_resource type="PackedScene" uid="uid://bxjvctynjfbip" path="res://game/end_run_transition.tscn" id="1_vivmo"]
 [ext_resource type="Script" uid="uid://v57jqm0nfxgs" path="res://game/player/player.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://dqr17jgpm5w68" path="res://game/player/healthbar.gd" id="2_5vw27"]
 [ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://game/player/spaceship.png" id="2_h2yge"]
@@ -436,6 +437,9 @@ fill_from = Vector2(0.5, 0.5)
 [node name="Node2D" type="Node2D" unique_id=2012011173]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1648034863]
+
+[node name="Transition" parent="CanvasLayer" unique_id=822656664 instance=ExtResource("1_vivmo")]
+z_index = 1
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1245321238]
 layout_mode = 3

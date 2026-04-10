@@ -5,9 +5,9 @@ extends Control
 @onready var added_money_label: Label = $RunInfo/Background/AddedMoney
 
 func _ready() -> void:
-	self.animate()
+	self.visible = false
 
-func animate() -> void:
+func start() -> void:
 	added_money_label.text = "₡" + str(GameState.run_money)
 	set_display_total_money(GameState.money)
 	animation_player.play("part_1")

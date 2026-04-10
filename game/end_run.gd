@@ -2,6 +2,8 @@ extends Control
 
 @onready var timer: Timer = $Timer
 @onready var clip: Control = $ColorRect
+@onready var transition: Control = $"../../Transition"
+@onready var player: RigidBody2D = $"../../../Player"
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("action"):
@@ -16,4 +18,5 @@ func _process(delta: float) -> void:
 
 
 func _on_timer_timeout() -> void:
-	get_tree().change_scene_to_file("res://upgrade/upgrade_ui.tscn")
+	player.freeze = true
+	transition.start()
