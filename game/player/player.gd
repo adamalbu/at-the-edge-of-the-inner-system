@@ -4,6 +4,7 @@ const THRUST = 40000.0
 const TORQUE = 700000.0
 
 @export var max_health = 50.0
+@export var laser_range = 200.0
 var health = max_health
 
 var controllable = true
@@ -11,11 +12,15 @@ var dead = false
 
 signal game_over
 
+func _draw() -> void:
+	draw_circle(to_local(position), laser_range, Color.GREEN, false)
 
 func _process(_delta: float) -> void:
 	if health <= 0 && !dead:
 		$AnimationPlayer.play("die")
 		dead = true
+	
+	queue_redraw()
 
 func _physics_process(_delta: float) -> void:
 	if !controllable:
