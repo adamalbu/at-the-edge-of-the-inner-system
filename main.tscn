@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cbrd5uthhsyjh"]
 
+[ext_resource type="PackedScene" uid="uid://opode4iyo36i" path="res://simple_transition.tscn" id="1_2cqfq"]
 [ext_resource type="Script" uid="uid://lvu0ttrm562g" path="res://ui.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://bxjvctynjfbip" path="res://game/end_run_transition.tscn" id="1_vivmo"]
 [ext_resource type="Script" uid="uid://v57jqm0nfxgs" path="res://game/player/player.gd" id="2_0xm2m"]
@@ -437,6 +438,10 @@ fill_from = Vector2(0.5, 0.5)
 [node name="Node2D" type="Node2D" unique_id=2012011173]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1648034863]
+
+[node name="SimpleTransition" parent="CanvasLayer" unique_id=2043691705 instance=ExtResource("1_2cqfq")]
+visible = false
+color = Color(0.09803922, 0.09803922, 0.09803922, 1)
 
 [node name="Transition" parent="CanvasLayer" unique_id=822656664 instance=ExtResource("1_vivmo")]
 z_index = 1

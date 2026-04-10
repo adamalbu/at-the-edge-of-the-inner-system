@@ -1,26 +1,14 @@
 [gd_scene format=3 uid="uid://cyw26up2867rj"]
 
 [ext_resource type="Script" uid="uid://6si2ngn5a18f" path="res://upgrade/upgrade_button_tool.gd" id="1_d5r2m"]
-[ext_resource type="FontFile" uid="uid://71frbma8hwst" path="res://PixelifySans.ttf" id="1_unoka"]
+[ext_resource type="Theme" uid="uid://bkrncibuvpxtr" path="res://button.tres" id="1_unoka"]
 
-[sub_resource type="Theme" id="Theme_unoka"]
-Label/fonts/font = ExtResource("1_unoka")
-Label/styles/focus = null
-Label/styles/normal = null
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0l55f"]
-bg_color = Color(0.80784315, 0.827451, 0.80784315, 1)
-
-[node name="UpgradeButton" type="Button" unique_id=172316452]
+[node name="___" type="Button" unique_id=172316452]
 offset_left = 320.0
 offset_top = 192.0
 offset_right = 512.0
 offset_bottom = 256.0
-theme = SubResource("Theme_unoka")
-theme_override_colors/font_color = Color(0.3137255, 0.32156864, 0.3137255, 1)
-theme_override_fonts/font = ExtResource("1_unoka")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_0l55f")
+theme = ExtResource("1_unoka")
 text = "..."
 script = ExtResource("1_d5r2m")
 

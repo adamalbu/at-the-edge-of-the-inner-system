@@ -19,3 +19,7 @@ func show_text() -> void:
 	$AnimationPlayer.play("text_in")
 	$BackgroundMargin.visible = true
 	$TextMargin.visible = true
+
+func _on_new_run_pressed() -> void:
+	await $"../SimpleTransition".slide_in()
+	get_tree().change_scene_to_file("res://main.tscn")
