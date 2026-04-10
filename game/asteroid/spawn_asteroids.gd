@@ -90,4 +90,3 @@ func _on_asteroid_destroyed(asteroid):
 		if i != -1:
 			list.remove_at(i)
 			break
-	GameState.money += 10

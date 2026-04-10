@@ -47,4 +47,5 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 func destroy():
 	destroying = true
 	destroyed.emit(self)
+	GameState.run_money += 10
 	$AnimationPlayer.play("asteroid_delete")
