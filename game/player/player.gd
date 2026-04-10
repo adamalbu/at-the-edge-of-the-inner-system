@@ -10,6 +10,8 @@ var dead = false
 signal game_over
 
 func _ready() -> void:
+	GameState.run_money = 0
+	
 	self.angular_damp = GameState.angular_damp
 	self.linear_damp = GameState.linear_damp
 

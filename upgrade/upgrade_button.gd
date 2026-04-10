@@ -39,6 +39,12 @@ func _refresh() -> void:
 	$Price.text = "₡" + str(price)
 	$Level.visible = max_level > 1
 
+func calculate_price() -> int:
+	var tmp_price = price
+	for i in range(level):
+		tmp_price *= price_multiplier
+	return tmp_price
+
 func _on_dependency_pressed() -> void:
 	current_max_level = dependency.level if inherit_max_level and dependency.level < max_level else max_level
 	disabled = is_maxed()
@@ -62,6 +68,6 @@ func _on_pressed() -> void:
 	level += 1
 	GameState.money -= price
 	GameState.upgrade(title)
-	price = round(price * price_multiplier)
+	price = calculate_price()
 	disabled = is_maxed()
 	_refresh()
