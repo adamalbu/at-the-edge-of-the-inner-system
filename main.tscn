@@ -621,7 +621,6 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Parallax2D" parent="." unique_id=1699268475 instance=ExtResource("5_dg77c")]
-scroll_offset = Vector2(3509, 1759)
 
 [node name="AsteroidManager" type="Node" parent="." unique_id=33070321 node_paths=PackedStringArray("player")]
 script = ExtResource("4_1bvp3")

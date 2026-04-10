@@ -5,9 +5,9 @@
 [ext_resource type="FontFile" uid="uid://71frbma8hwst" path="res://PixelifySans.ttf" id="1_jbcn4"]
 [ext_resource type="PackedScene" uid="uid://opode4iyo36i" path="res://simple_transition.tscn" id="1_pv3j5"]
 [ext_resource type="Script" uid="uid://bkq2ikueriv4m" path="res://upgrade/motion.gd" id="2_00dis"]
-[ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://game/player/spaceship.png" id="2_mseo7"]
 [ext_resource type="Texture2D" uid="uid://68kvlxjvcrto" path="res://game/player/spaceship_normal.png" id="3_00dis"]
 [ext_resource type="Texture2D" uid="uid://d30pwbrwc6bii" path="res://light_gradient.tres" id="4_2wegb"]
+[ext_resource type="Texture2D" uid="uid://byr0ss10rhoml" path="res://game/player/spaceship_flame.png" id="4_pv3j5"]
 [ext_resource type="PackedScene" uid="uid://cyw26up2867rj" path="res://upgrade/upgrade_button.tscn" id="6_00dis"]
 [ext_resource type="Script" uid="uid://c33kwpfsf3dti" path="res://upgrade/upgrade_tree.gd" id="8_hcaxd"]
 [ext_resource type="Theme" uid="uid://bkrncibuvpxtr" path="res://button.tres" id="9_pv3j5"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dhfb23cicd2un" path="res://upgrade/line.tscn" id="12_pv3j5"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_6h2i3"]
-diffuse_texture = ExtResource("2_mseo7")
+diffuse_texture = ExtResource("4_pv3j5")
 normal_texture = ExtResource("3_00dis")
 texture_filter = 1
 
@@ -286,6 +286,14 @@ position = Vector2(313, 467)
 scale = Vector2(4, 4)
 texture = SubResource("CanvasTexture_6h2i3")
 
+[node name="FlameLight" type="PointLight2D" parent="SidePanel/SubViewportContainer/SubViewport/Node2D/Sprite2D" unique_id=503477986]
+position = Vector2(0, 10)
+scale = Vector2(1.140625, 1.265625)
+color = Color(1, 0.6156863, 0.07058824, 1)
+shadow_enabled = true
+texture = ExtResource("4_2wegb")
+height = 10.0
+
 [node name="Camera2D" type="Camera2D" parent="SidePanel/SubViewportContainer/SubViewport/Node2D" unique_id=751394886]
 position = Vector2(313, 467)
 script = ExtResource("2_00dis")
@@ -406,7 +414,6 @@ title = "Torque"
 description = "Increases the ship's torque for faster turning"
 price = 10
 max_level = 10
-inherit_max_level = null
 metadata/_edit_use_anchors_ = true
 
 [node name="Gyroscope" parent="UpgradeTree/Tree/Torque" unique_id=388499834 node_paths=PackedStringArray("dependency") instance=ExtResource("6_00dis")]
@@ -439,7 +446,6 @@ title = "Thrust"
 description = "Increses the ship's thrust for faster movment"
 price = 10
 max_level = 10
-inherit_max_level = null
 metadata/_edit_use_anchors_ = true
 
 [node name="Stabilizers" parent="UpgradeTree/Tree/Thrust" unique_id=2122178803 node_paths=PackedStringArray("dependency") instance=ExtResource("6_00dis")]

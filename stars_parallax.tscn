@@ -1,14 +1,45 @@
 [gd_scene format=3 uid="uid://lyj6d52qayy3"]
 
-[ext_resource type="Texture2D" uid="uid://cp1l3ql8b6gvt" path="res://stars.png" id="1_pwd8s"]
+[ext_resource type="Texture2D" uid="uid://bmrnrgd5ii3hn" path="res://game/stars/stars_1.png" id="1_pwd8s"]
+[ext_resource type="Texture2D" uid="uid://cu5aobepw4hu7" path="res://game/stars/stars_2.png" id="2_l01ic"]
+[ext_resource type="Texture2D" uid="uid://c02nq8pwetdsn" path="res://game/stars/stars_3.png" id="3_g11gv"]
 
-[node name="Parallax2D" type="Parallax2D" unique_id=1699268475]
-scroll_offset = Vector2(5158, 659)
-repeat_size = Vector2(3840, 2160)
-metadata/_edit_lock_ = true
+[node name="Node2D" type="Node2D" unique_id=639873801]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1815203252]
-position = Vector2(578, 322)
-scale = Vector2(2.24, 2.24)
+[node name="Background" type="Parallax2D" parent="." unique_id=472273746]
+repeat_size = Vector2(1920, 1080)
+repeat_times = 3
+
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=109113221]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="Layer1" type="Parallax2D" parent="." unique_id=1673562553]
+scroll_scale = Vector2(0.8, 0.8)
+repeat_size = Vector2(1920, 1080)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Layer1" unique_id=891329204]
+position = Vector2(960, 539)
 texture = ExtResource("1_pwd8s")
-metadata/_edit_lock_ = true
+
+[node name="Layer2" type="Parallax2D" parent="." unique_id=314948844]
+scroll_scale = Vector2(0.75, 0.75)
+repeat_size = Vector2(1920, 1080)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Layer2" unique_id=1774090857]
+modulate = Color(1, 1, 1, 0.47843137)
+position = Vector2(960, 539)
+texture = ExtResource("2_l01ic")
+
+[node name="Layer3" type="Parallax2D" parent="." unique_id=941886783]
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(1920, 1080)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Layer3" unique_id=626406790]
+modulate = Color(1, 1, 1, 0.42745098)
+position = Vector2(960, 539)
+texture = ExtResource("3_g11gv")

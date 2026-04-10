@@ -16,7 +16,7 @@ func _ready() -> void:
 	self.linear_damp = GameState.linear_damp
 
 func _draw() -> void:
-	draw_circle(to_local(position), laser_range, Color.GREEN, false)
+	draw_circle(to_local(position), laser_range, Color(0.0, 1.0, 0.0, 0.3), false)
 
 func _process(_delta: float) -> void:
 	if health <= 0 && !dead:
