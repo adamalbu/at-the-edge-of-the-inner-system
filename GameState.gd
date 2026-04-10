@@ -4,7 +4,7 @@ enum DrillType {SUSTAINED, BURST}
 
 var upgrades: Dictionary[String, int] = {}
 
-var money: int = 10000
+var money: int = 0
 var run_money: int = 0
 
 var drill_type = DrillType.SUSTAINED
