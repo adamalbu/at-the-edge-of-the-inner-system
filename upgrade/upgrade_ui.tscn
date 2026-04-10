@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://68kvlxjvcrto" path="res://game/player/spaceship_normal.png" id="3_00dis"]
 [ext_resource type="Texture2D" uid="uid://d30pwbrwc6bii" path="res://light_gradient.tres" id="4_2wegb"]
 [ext_resource type="PackedScene" uid="uid://cyw26up2867rj" path="res://upgrade/upgrade_button.tscn" id="6_00dis"]
-[ext_resource type="PackedScene" uid="uid://dhfb23cicd2un" path="res://upgrade/line.tscn" id="7_2wegb"]
 [ext_resource type="Script" uid="uid://c33kwpfsf3dti" path="res://upgrade/upgrade_tree.gd" id="8_hcaxd"]
 [ext_resource type="Theme" uid="uid://bkrncibuvpxtr" path="res://button.tres" id="9_pv3j5"]
 [ext_resource type="Script" uid="uid://ca25ac8bu2nqb" path="res://upgrade/coins_label.gd" id="10_grdk4"]
@@ -344,10 +343,11 @@ theme_override_font_sizes/bold_font_size = 20
 bbcode_enabled = true
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-[left][b]Bold Text[/b][/left]"
+[b]Bold Text[/b]"
 fit_content = true
 autowrap_mode = 2
 horizontal_alignment = 3
+justification_flags = 34
 visible_characters_behavior = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SidePanel" unique_id=298766593]
@@ -387,13 +387,6 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="Line" parent="UpgradeTree/Tree" unique_id=708418238 instance=ExtResource("7_2wegb")]
-points = PackedVector2Array(416, 192, 416, 96, 736, 96, 736, 192)
-
-[node name="Line2" parent="UpgradeTree/Tree" unique_id=45965539 instance=ExtResource("7_2wegb")]
-points = PackedVector2Array(576, 96, 576, 32)
-end_cap_mode = 2
-
 [node name="Burst" type="Control" parent="UpgradeTree/Tree" unique_id=360643029]
 anchors_preset = 0
 offset_right = 40.0
@@ -401,8 +394,8 @@ offset_bottom = 40.0
 
 [node name="Burst" parent="UpgradeTree/Tree/Burst" unique_id=702046802 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
 layout_mode = 1
-offset_left = 640.0
-offset_right = 832.0
+offset_left = 1024.0
+offset_right = 1216.0
 text = "Burst"
 title = "Burst"
 description = "Charges up and fires a single concentrated impact that punches through rock
@@ -418,6 +411,8 @@ offset_bottom = 40.0
 
 [node name="Sustained" parent="UpgradeTree/Tree/Sustained" unique_id=172316452 node_paths=PackedStringArray("exclude_if") instance=ExtResource("6_00dis")]
 layout_mode = 1
+offset_left = 768.0
+offset_right = 960.0
 text = "Sustained"
 title = "Sustained"
 description = "A continuous beam that steadily chews through rock
@@ -426,26 +421,24 @@ description = "A continuous beam that steadily chews through rock
 price = 10
 exclude_if = NodePath("../../Burst/Burst")
 
-[node name="Thing" parent="UpgradeTree/Tree/Sustained" unique_id=909589663 node_paths=PackedStringArray("dependency") instance=ExtResource("6_00dis")]
-visible = false
+[node name="Thrust" parent="UpgradeTree/Tree" unique_id=1103205459 instance=ExtResource("6_00dis")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 8.0
-anchor_top = 8.0
-anchor_right = 8.0
-anchor_bottom = 8.0
+anchor_left = 0.29447854
+anchor_top = 0.17728531
+anchor_right = 0.29447854
+anchor_bottom = 0.17728531
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 192.0
 offset_bottom = 64.0
-text = "Thing"
-title = "Thing"
+text = "Thrust"
+title = "Thrust"
+description = "Increases the ship's thrust by [b]+10%[/b]"
 price = 10
-dependency = NodePath("../Sustained")
+max_level = 5
+price_multiplier = 2
 metadata/_edit_use_anchors_ = true
-
-[node name="Line" parent="UpgradeTree/Tree/Sustained/Thing" unique_id=1856004714 instance=ExtResource("7_2wegb")]
-points = PackedVector2Array(96, -64, 96, 0)
 
 [node name="Coins" type="Label" parent="UpgradeTree" unique_id=720799131]
 layout_mode = 0

@@ -6,20 +6,38 @@ extends Button
 @export_multiline var description: String = ""
 @export var price: int = 0
 
+@export var max_level: int = 1
+
+# How much to multiply the price by for each level
+@export var price_multiplier: int = 1.5
+
 @export_category("Dependencies")
 @export var exclude_if: UpgradeButton
 @export var dependency: UpgradeButton
 
-var bought = false
+var level = 0
 
 const tree_parent_name: String = "UpgradeTree"
 
 var tree_parent: UpgradeTree
 
-func _ready() -> void:
+func update_button() -> void:
+	self.name = self.title
 	self.text = self.title
 	$Price.text = "₡" + str(self.price)
+	
 	self.tree_parent = self.find_parent(tree_parent_name)
+	
+	if self.max_level <= 1:
+		$Level.visible = false
+	else:
+		$Level.visible = true
+		
+func is_maxed() -> bool:
+	return self.max_level == self.level
+
+func _ready() -> void:
+	self.update_button()
 	
 	if self.dependency != null:
 		self.visible = false
@@ -36,10 +54,17 @@ func _on_mouse_exited() -> void:
 	self.tree_parent.side_panel.hide_text()
 
 func _on_pressed() -> void:
-	self.tree_parent.animation_player.stop()
+	self.tree_parent.upgrade_unlocked(self.title)
+	
 	if self.price > GameState.money:
+		self.tree_parent.animation_player.stop()
 		self.tree_parent.animation_player.play("not_enough")
 	else:
+		self.level += 1
 		GameState.money -= self.price
-		self.bought = true
-		self.disabled = true
+		
+		if self.is_maxed():
+			self.disabled = true
+		
+		self.price *= self.price_multiplier
+		self.update_button()
