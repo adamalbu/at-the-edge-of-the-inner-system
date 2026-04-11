@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://13xadnuleudg"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jkc50"]
+
+[node name="1" type="RigidBody2D" unique_id=1012738364]
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1748138929]
+scale = Vector2(4, 4)
+texture = SubResource("CanvasTexture_jkc50")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1218329831]

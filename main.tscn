@@ -3,431 +3,20 @@
 [ext_resource type="PackedScene" uid="uid://opode4iyo36i" path="res://simple_transition.tscn" id="1_2cqfq"]
 [ext_resource type="Script" uid="uid://lvu0ttrm562g" path="res://ui.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://bxjvctynjfbip" path="res://game/end_run_transition.tscn" id="1_vivmo"]
-[ext_resource type="Script" uid="uid://v57jqm0nfxgs" path="res://game/player/player.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://dqr17jgpm5w68" path="res://game/player/healthbar.gd" id="2_5vw27"]
-[ext_resource type="Texture2D" uid="uid://dqvbt1lsqtggs" path="res://game/player/spaceship.png" id="2_h2yge"]
 [ext_resource type="FontFile" uid="uid://71frbma8hwst" path="res://PixelifySans.ttf" id="3_4c57u"]
 [ext_resource type="Script" uid="uid://uf6mdh0rpmsr" path="res://game/asteroid/spawn_asteroids.gd" id="4_1bvp3"]
-[ext_resource type="Script" uid="uid://b6d6ipar2ppvm" path="res://game/player/laser.gd" id="4_7mycd"]
-[ext_resource type="Script" uid="uid://dw5s7y606ubtt" path="res://game_over_screen.gd" id="4_efxa6"]
 [ext_resource type="PackedScene" uid="uid://lyj6d52qayy3" path="res://stars_parallax.tscn" id="5_dg77c"]
 [ext_resource type="PackedScene" uid="uid://c56qoa61cqbox" path="res://game/asteroid/asteroid.tscn" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://cm72b378wms2f" path="res://game/end_run.gd" id="5_w48qg"]
-[ext_resource type="Texture2D" uid="uid://68kvlxjvcrto" path="res://game/player/spaceship_normal.png" id="6_kek77"]
+[ext_resource type="PackedScene" uid="uid://canva4hbgf33l" path="res://game/ship_destroyed_screen.tscn" id="6_yaehf"]
+[ext_resource type="Script" uid="uid://dqj388jf8gw82" path="res://game/debug_menu.gd" id="8_w48qg"]
+[ext_resource type="PackedScene" uid="uid://urfwq4akbo7x" path="res://game/player/player.tscn" id="11_ycdy4"]
 [ext_resource type="Script" uid="uid://dsv5ef35u4ywr" path="res://game/start_area.gd" id="13_ycdy4"]
-[ext_resource type="Texture2D" uid="uid://byr0ss10rhoml" path="res://game/player/spaceship_flame.png" id="14_yaehf"]
 [ext_resource type="Texture2D" uid="uid://d30pwbrwc6bii" path="res://light_gradient.tres" id="16_yaehf"]
-
-[sub_resource type="Animation" id="Animation_dg77c"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GameOver:size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1920, 1080)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GameOver:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GameOver/Label:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -147.5)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("GameOver/Control:size")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(437.33325, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("GameOver/Control:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(741.3334, 768)]
-}
-
-[sub_resource type="Animation" id="Animation_efxa6"]
-resource_name = "show_game_over"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GameOver:size")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(2.4622865, 73.0271),
-"update": 0,
-"values": [Vector2(1920, 0), Vector2(1920, 1080)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GameOver:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GameOver/Label:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, -147.5), Vector2(0, -252)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("GameOver/Control:size")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(1, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(437.33325, 0), Vector2(437.33325, 96)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("GameOver/Control:position")
-tracks/4/interp = 2
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 1, 3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(741.3334, 640), Vector2(741.3334, 640), Vector2(741.3334, 544)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dg77c"]
-_data = {
-&"RESET": SubResource("Animation_dg77c"),
-&"show_game_over": SubResource("Animation_efxa6")
-}
 
 [sub_resource type="Theme" id="Theme_ycdy4"]
 Label/font_sizes/font_size = 50
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kek77"]
-lifetime_randomness = 0.5
-particle_flag_disable_z = true
-angle_min = -720.0
-angle_max = 720.0
-spread = 180.0
-initial_velocity_min = 18.05
-initial_velocity_max = 713.6
-orbit_velocity_min = 9.49949e-08
-orbit_velocity_max = 9.49949e-08
-gravity = Vector3(0, 0, 0)
-scale_min = 0.0
-scale_max = 8.42
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_4c57u"]
-diffuse_texture = ExtResource("2_h2yge")
-normal_texture = ExtResource("6_kek77")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_074og"]
-load_path = "res://.godot/imported/spaceship_normal.png-7a2be2b229850339a6c7d135931f2d79.ctex"
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_cegan"]
-diffuse_texture = ExtResource("14_yaehf")
-normal_texture = SubResource("CompressedTexture2D_074og")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5vw27"]
-lifetime_randomness = 0.27
-particle_flag_disable_z = true
-angle_min = -720.0
-angle_max = 720.0
-inherit_velocity_ratio = 1.0
-direction = Vector3(0, 0, 0)
-spread = 180.0
-initial_velocity_min = 13.24
-initial_velocity_max = 42.559998
-gravity = Vector3(0, 0, 0)
-linear_accel_min = -2.2351742e-06
-linear_accel_max = -2.2351742e-06
-damping_min = 0.24100001
-damping_max = 2.046
-scale_min = 0.0
-scale_max = 7.0099998
-color = Color(0, 0.99607843, 0, 1)
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_272bh"]
-lifetime_randomness = 0.27
-particle_flag_disable_z = true
-angle_min = -720.0
-angle_max = 720.0
-inherit_velocity_ratio = 1.0
-velocity_pivot = Vector3(3.265, 3.96, 5.515)
-direction = Vector3(0, 1.995, 0)
-spread = 180.0
-initial_velocity_min = 277.52
-initial_velocity_max = 306.84
-gravity = Vector3(0, 0, 0)
-linear_accel_min = -2.2351742e-06
-linear_accel_max = -2.2351742e-06
-damping_min = 0.24100001
-damping_max = 2.046
-scale_min = 0.0
-scale_max = 3.3999999
-color = Color(0, 1, 0, 1)
-
-[sub_resource type="Animation" id="Animation_4c57u"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles2D:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"set_controllable"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:collision_layer")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:collision_mask")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Laser:collision_mask")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerSprite:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Laser:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("PlayerFlameSprite/FlameLight:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_kek77"]
-resource_name = "die"
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"set_uncontrollable"
-}, {
-"args": [],
-"method": &"send_game_over"
-}]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GPUParticles2D:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:collision_layer")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:collision_mask")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Laser:collision_mask")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerSprite:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Laser:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("PlayerFlameSprite/FlameLight:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4c57u"]
-_data = {
-&"RESET": SubResource("Animation_4c57u"),
-&"die": SubResource("Animation_kek77")
-}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dg77c"]
 radius = 384.0
@@ -454,7 +43,18 @@ color = Color(0.09803922, 0.09803922, 0.09803922, 1)
 [node name="Transition" parent="CanvasLayer" unique_id=822656664 instance=ExtResource("1_vivmo")]
 z_index = 1
 
-[node name="Control" type="Control" parent="CanvasLayer" unique_id=1245321238]
+[node name="ShipDestroyed" parent="CanvasLayer" unique_id=2133501260 node_paths=PackedStringArray("simple_transition") instance=ExtResource("6_yaehf")]
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1920.0
+offset_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+simple_transition = NodePath("../SimpleTransition")
+
+[node name="Overlay" type="Control" parent="CanvasLayer" unique_id=1245321238]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -462,7 +62,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control" unique_id=154768068]
+[node name="OverlayMargin" type="MarginContainer" parent="CanvasLayer/Overlay" unique_id=154768068]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -476,11 +76,11 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Control" type="Control" parent="CanvasLayer/Control/MarginContainer" unique_id=1086811036]
+[node name="Control" type="Control" parent="CanvasLayer/Overlay/OverlayMargin" unique_id=1086811036]
 layout_mode = 2
 script = ExtResource("1_272bh")
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/Control" unique_id=596389117]
+[node name="Label" type="Label" parent="CanvasLayer/Overlay/OverlayMargin/Control" unique_id=596389117]
 layout_mode = 1
 offset_right = 44.0
 offset_bottom = 51.0
@@ -488,7 +88,7 @@ theme_override_fonts/font = ExtResource("3_4c57u")
 theme_override_font_sizes/font_size = 37
 text = "₡0"
 
-[node name="HealthbarBG" type="ColorRect" parent="CanvasLayer/Control/MarginContainer/Control" unique_id=1695075014 node_paths=PackedStringArray("player")]
+[node name="HealthbarBG" type="ColorRect" parent="CanvasLayer/Overlay/OverlayMargin/Control" unique_id=1695075014 node_paths=PackedStringArray("player")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -500,7 +100,7 @@ color = Color(0.15686275, 0.15686275, 0.15686275, 1)
 script = ExtResource("2_5vw27")
 player = NodePath("../../../../../Player")
 
-[node name="HealthbarFG" type="ColorRect" parent="CanvasLayer/Control/MarginContainer/Control/HealthbarBG" unique_id=1826070772]
+[node name="HealthbarFG" type="ColorRect" parent="CanvasLayer/Overlay/OverlayMargin/Control/HealthbarBG" unique_id=1826070772]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -509,66 +109,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 1)
 
-[node name="GameOver" type="ColorRect" parent="CanvasLayer/Control" unique_id=624773798]
-visible = false
-z_index = 1
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-script = ExtResource("4_efxa6")
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/GameOver" unique_id=1369532879]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -147.5
-offset_bottom = 147.50024
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_4c57u")
-theme_override_font_sizes/font_size = 245
-text = "GAME OVER"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Control" type="Control" parent="CanvasLayer/Control/GameOver" unique_id=1305362022]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 741.3334
-offset_top = 768.0
-offset_right = -741.3334
-offset_bottom = -312.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/GameOver/Control" unique_id=358410303]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_4c57u")
-theme_override_font_sizes/font_size = 91
-text = "₡0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/GameOver" unique_id=1152210283]
-root_node = NodePath("../..")
-libraries/ = SubResource("AnimationLibrary_dg77c")
-autoplay = &"RESET"
-
-[node name="EndRun" type="Control" parent="CanvasLayer/Control" unique_id=285663060]
+[node name="EndRun" type="Control" parent="CanvasLayer/Overlay" unique_id=285663060]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -584,7 +125,7 @@ grow_vertical = 2
 theme = SubResource("Theme_ycdy4")
 script = ExtResource("5_w48qg")
 
-[node name="EndRunWhite" type="Label" parent="CanvasLayer/Control/EndRun" unique_id=800126717]
+[node name="EndRunWhite" type="Label" parent="CanvasLayer/Overlay/EndRun" unique_id=800126717]
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 0.989
@@ -595,7 +136,7 @@ text = "[E] End Run"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/EndRun" unique_id=1735789030]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Overlay/EndRun" unique_id=1735789030]
 clip_contents = true
 layout_mode = 1
 anchors_preset = -1
@@ -604,7 +145,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EndRunBlack" type="Label" parent="CanvasLayer/Control/EndRun/ColorRect" unique_id=707739118]
+[node name="EndRunBlack" type="Label" parent="CanvasLayer/Overlay/EndRun/ColorRect" unique_id=707739118]
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 0.989
@@ -616,9 +157,21 @@ text = "[E] End Run"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="Timer" parent="CanvasLayer/Control/EndRun" unique_id=1651353079]
+[node name="Timer" type="Timer" parent="CanvasLayer/Overlay/EndRun" unique_id=1651353079]
 wait_time = 2.0
 one_shot = true
+
+[node name="DebugMenu" type="VBoxContainer" parent="CanvasLayer" unique_id=1356555051]
+visible = false
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 134.0
+grow_vertical = 2
+script = ExtResource("8_w48qg")
+
+[node name="Kill" type="Button" parent="CanvasLayer/DebugMenu" unique_id=1531657605]
+layout_mode = 2
+text = "Kill"
 
 [node name="Parallax2D" parent="." unique_id=1699268475 instance=ExtResource("5_dg77c")]
 
@@ -645,101 +198,11 @@ energy = 0.5
 blend_mode = 1
 height = 0.5
 
-[node name="Player" type="RigidBody2D" parent="." unique_id=2006633837 groups=["player"]]
-mass = 400.0
-gravity_scale = 0.0
-max_contacts_reported = 1
-script = ExtResource("2_0xm2m")
-metadata/controllable = true
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Player" unique_id=756419289]
-emitting = false
-amount = 30
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_kek77")
-
-[node name="PlayerSprite" type="Sprite2D" parent="Player" unique_id=961911905]
-scale = Vector2(4, 4)
-texture = SubResource("CanvasTexture_4c57u")
-region_rect = Rect2(0, 0, 27.710037, 24.971848)
-metadata/_edit_lock_ = true
-
-[node name="PlayerFlameSprite" type="Sprite2D" parent="Player" unique_id=489793713]
-visible = false
-scale = Vector2(4, 4)
-texture = SubResource("CanvasTexture_cegan")
-
-[node name="FlameLight" type="PointLight2D" parent="Player/PlayerFlameSprite" unique_id=500096361]
-position = Vector2(2.9802322e-08, 10)
-scale = Vector2(1.140625, 1.265625)
-color = Color(1, 0.6156863, 0.07058824, 1)
-shadow_enabled = true
-texture = ExtResource("16_yaehf")
-height = 10.0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player" unique_id=525289533]
-visible = false
-polygon = PackedVector2Array(-60, 17, -60, -17, -9, -52, 10, -52, 60, -17, 60, 17, 32, 36, -32, 36)
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=207304984]
-scale = Vector2(4, 4)
-zoom = Vector2(0.7, 0.7)
-position_smoothing_enabled = true
-position_smoothing_speed = 2.5
-
-[node name="Laser" type="RayCast2D" parent="Player" unique_id=1858444862 node_paths=PackedStringArray("lasers")]
-target_position = Vector2(0, -2000)
-script = ExtResource("4_7mycd")
-lasers = [NodePath("LaserPosLeft"), NodePath("LaserPosRight")]
-
-[node name="LaserParticles" type="GPUParticles2D" parent="Player/Laser" unique_id=1194459819]
-emitting = false
-amount = 40
-process_material = SubResource("ParticleProcessMaterial_5vw27")
-
-[node name="MineParticles" type="GPUParticles2D" parent="Player/Laser" unique_id=2053322509]
-emitting = false
-amount = 10
-process_material = SubResource("ParticleProcessMaterial_272bh")
-
-[node name="LaserPosLeft" type="Node2D" parent="Player/Laser" unique_id=1356938411]
-position = Vector2(-54, -20)
-
-[node name="LaserLightLeft" type="PointLight2D" parent="Player/Laser/LaserPosLeft" unique_id=513272290]
-visible = false
-color = Color(0, 1, 0, 1)
-energy = 0.85
-texture = ExtResource("16_yaehf")
-texture_scale = 2.0
-height = 3.0
-
-[node name="LaserPosRight" type="Node2D" parent="Player/Laser" unique_id=1050465460]
-position = Vector2(54, -20)
-
-[node name="LaserLightLeft" type="PointLight2D" parent="Player/Laser/LaserPosRight" unique_id=412087764]
-visible = false
-color = Color(0, 1, 0, 1)
-energy = 0.85
-texture = ExtResource("16_yaehf")
-texture_scale = 2.0
-height = 3.0
-
-[node name="LaserLight" type="PointLight2D" parent="Player/Laser" unique_id=541319419]
-visible = false
-color = Color(0, 1, 0, 1)
-energy = 0.64
-texture = ExtResource("16_yaehf")
-height = 50.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player" unique_id=351209599]
-libraries/ = SubResource("AnimationLibrary_4c57u")
-autoplay = &"RESET"
+[node name="Player" parent="." unique_id=1903222552 instance=ExtResource("11_ycdy4")]
 
 [node name="StartArea" type="Area2D" parent="." unique_id=1028840250 node_paths=PackedStringArray("end_run_label")]
 script = ExtResource("13_ycdy4")
-end_run_label = NodePath("../CanvasLayer/Control/EndRun")
+end_run_label = NodePath("../CanvasLayer/Overlay/EndRun")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartArea" unique_id=1895155092]
@@ -759,8 +222,8 @@ texture = ExtResource("16_yaehf")
 height = 120.0
 metadata/_edit_lock_ = true
 
-[connection signal="timeout" from="CanvasLayer/Control/EndRun/Timer" to="CanvasLayer/Control/EndRun" method="_on_timer_timeout"]
-[connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
-[connection signal="game_over" from="Player" to="CanvasLayer/Control/GameOver" method="show_game_over"]
+[connection signal="timeout" from="CanvasLayer/Overlay/EndRun/Timer" to="CanvasLayer/Overlay/EndRun" method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/DebugMenu/Kill" to="CanvasLayer/DebugMenu" method="_on_kill_pressed"]
+[connection signal="destroyed" from="Player" to="CanvasLayer/ShipDestroyed" method="show_game_over"]
 [connection signal="body_entered" from="StartArea" to="StartArea" method="_on_body_entered"]
 [connection signal="body_exited" from="StartArea" to="StartArea" method="_on_body_exited"]

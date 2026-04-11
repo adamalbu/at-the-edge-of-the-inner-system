@@ -474,8 +474,9 @@ points = PackedVector2Array(224, 128, 480, 128)
 [node name="Coins" type="Label" parent="UpgradeTree" unique_id=720799131]
 layout_mode = 0
 offset_left = 14.0
+offset_top = 18.0
 offset_right = 294.0
-offset_bottom = 69.0
+offset_bottom = 87.0
 theme_override_font_sizes/font_size = 57
 text = "₡?"
 script = ExtResource("10_grdk4")
