@@ -430,7 +430,7 @@ metadata/_edit_use_anchors_ = true
 visible = true
 
 [node name="Price" parent="UpgradeTree/Tree/Torque" index="1" unique_id=1653139699]
-text = "₡<null>"
+text = "₡10"
 
 [node name="Line" parent="UpgradeTree/Tree/Torque" index="2" unique_id=708418238]
 visible = false
@@ -499,7 +499,7 @@ price = 10
 metadata/_edit_use_anchors_ = true
 
 [node name="Price" parent="UpgradeTree/Tree/Drill" index="1" unique_id=1653139699]
-text = "₡<null>"
+text = "₡10"
 
 [node name="Line" parent="UpgradeTree/Tree/Drill" index="2" unique_id=708418238]
 visible = false
@@ -526,7 +526,7 @@ dependency = NodePath("..")
 visible = true
 
 [node name="Price" parent="UpgradeTree/Tree/Drill/Range" index="1" unique_id=1653139699]
-text = "₡<null>"
+text = "₡10"
 
 [node name="Line" parent="UpgradeTree/Tree/Drill/Range" index="2" unique_id=708418238]
 points = PackedVector2Array(128, -64, 128, 0, 0, 0, 0, 64)
@@ -553,7 +553,7 @@ dependency = NodePath("..")
 visible = true
 
 [node name="Price" parent="UpgradeTree/Tree/Drill/Damage" index="1" unique_id=1653139699]
-text = "₡<null>"
+text = "₡15"
 
 [node name="Line" parent="UpgradeTree/Tree/Drill/Damage" index="2" unique_id=708418238]
 points = PackedVector2Array(-128, -64, -128, 0, 0, 0, 0, 64)
