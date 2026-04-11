@@ -13,6 +13,7 @@ var frames_since_damage: int
 signal destroyed
 
 func _ready() -> void:
+	GameState.update_upgrades()
 	GameState.run_money = 0
 	
 	self.angular_damp = GameState.angular_damp
