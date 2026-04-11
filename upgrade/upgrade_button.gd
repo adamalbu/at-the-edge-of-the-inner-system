@@ -15,6 +15,7 @@ extends Button
 @export var inherit_max_level: bool = false
 
 var current_max_level: int = 1
+var current_price: int = price
 var level: int = 0
 var tree_parent: UpgradeTree
 
@@ -36,7 +37,7 @@ func is_maxed() -> bool:
 
 func _refresh() -> void:
 	text = title
-	$Price.text = "₡" + str(price)
+	$Price.text = "₡" + str(current_price)
 	$Level.visible = max_level > 1
 
 func calculate_price() -> int:
@@ -60,14 +61,14 @@ func _on_mouse_exited() -> void:
 	tree_parent.side_panel.hide_text()
 
 func _on_pressed() -> void:
-	if price > GameState.money:
+	if current_price > GameState.money:
 		tree_parent.animation_player.stop()
 		tree_parent.animation_player.play("not_enough")
 		return
 
 	level += 1
-	GameState.money -= price
+	GameState.money -= current_price
 	GameState.upgrade(title)
-	price = calculate_price()
+	current_price = calculate_price()
 	disabled = is_maxed()
 	_refresh()

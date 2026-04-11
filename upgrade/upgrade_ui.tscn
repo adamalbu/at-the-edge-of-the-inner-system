@@ -400,13 +400,23 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_pv3j5")
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
+[node name="Lines" type="Node" parent="UpgradeTree/Tree" unique_id=532555137]
+
+[node name="Line" parent="UpgradeTree/Tree/Lines" unique_id=495779584 instance=ExtResource("12_pv3j5")]
+position = Vector2(608, 64)
+points = PackedVector2Array(0, 0, 0, 64)
+begin_cap_mode = 2
+
+[node name="Main" parent="UpgradeTree/Tree/Lines" unique_id=718771093 instance=ExtResource("12_pv3j5")]
+points = PackedVector2Array(224, 192, 224, 128, 928, 128, 928, 192)
+begin_cap_mode = 0
+end_cap_mode = 0
+
 [node name="Torque" parent="UpgradeTree/Tree" unique_id=1454377952 instance=ExtResource("6_00dis")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -1.3333334
-anchor_top = 0.00092336105
 anchor_right = -1.3333334
-anchor_bottom = 0.00092336105
 offset_left = 1866.6667
 offset_right = 2058.6667
 text = "Torque"
@@ -415,6 +425,15 @@ description = "Increases the ship's torque for faster turning"
 price = 10
 max_level = 10
 metadata/_edit_use_anchors_ = true
+
+[node name="Level" parent="UpgradeTree/Tree/Torque" index="0" unique_id=2060337461]
+visible = true
+
+[node name="Price" parent="UpgradeTree/Tree/Torque" index="1" unique_id=1653139699]
+text = "₡<null>"
+
+[node name="Line" parent="UpgradeTree/Tree/Torque" index="2" unique_id=708418238]
+visible = false
 
 [node name="Gyroscope" parent="UpgradeTree/Tree/Torque" unique_id=388499834 node_paths=PackedStringArray("dependency") instance=ExtResource("6_00dis")]
 layout_mode = 0
@@ -462,21 +481,88 @@ max_level = 10
 dependency = NodePath("..")
 inherit_max_level = true
 
-[node name="Lines" type="Node" parent="UpgradeTree/Tree" unique_id=532555137]
+[node name="Drill" parent="UpgradeTree/Tree" unique_id=172316452 instance=ExtResource("6_00dis")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6380368
+anchor_top = 0.17728531
+anchor_right = 0.6380368
+anchor_bottom = 0.17728531
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 192.0
+offset_bottom = 64.0
+text = "Drill"
+title = "Drill"
+description = "Increases the range and damage of the mining drill"
+price = 10
+metadata/_edit_use_anchors_ = true
 
-[node name="Line" parent="UpgradeTree/Tree/Lines" unique_id=495779584 instance=ExtResource("12_pv3j5")]
-position = Vector2(352, 64)
-points = PackedVector2Array(0, 0, 0, 64)
+[node name="Price" parent="UpgradeTree/Tree/Drill" index="1" unique_id=1653139699]
+text = "₡<null>"
 
-[node name="Main" parent="UpgradeTree/Tree/Lines" unique_id=718771093 instance=ExtResource("12_pv3j5")]
-points = PackedVector2Array(224, 128, 480, 128)
+[node name="Line" parent="UpgradeTree/Tree/Drill" index="2" unique_id=708418238]
+visible = false
+
+[node name="Range" parent="UpgradeTree/Tree/Drill" unique_id=413536793 node_paths=PackedStringArray("dependency") instance=ExtResource("6_00dis")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.66700006
+anchor_top = 3.0000002
+anchor_right = -0.66700006
+anchor_bottom = 3.0000002
+offset_left = 0.06401062
+offset_top = -1.5258789e-05
+offset_right = 192.06401
+offset_bottom = 63.999985
+text = "Range"
+title = "Range"
+description = "Increases the range of the mining drill"
+price = 10
+max_level = 10
+dependency = NodePath("..")
+
+[node name="Level" parent="UpgradeTree/Tree/Drill/Range" index="0" unique_id=2060337461]
+visible = true
+
+[node name="Price" parent="UpgradeTree/Tree/Drill/Range" index="1" unique_id=1653139699]
+text = "₡<null>"
+
+[node name="Line" parent="UpgradeTree/Tree/Drill/Range" index="2" unique_id=708418238]
+points = PackedVector2Array(128, -64, 128, 0, 0, 0, 0, 64)
+
+[node name="Damage" parent="UpgradeTree/Tree/Drill" unique_id=1155048592 node_paths=PackedStringArray("dependency") instance=ExtResource("6_00dis")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.66700006
+anchor_top = 3.0000002
+anchor_right = 0.66700006
+anchor_bottom = 3.0000002
+offset_left = -0.06401062
+offset_top = -1.5258789e-05
+offset_right = 191.93599
+offset_bottom = 63.999985
+text = "Damage"
+title = "Damage"
+description = "Increases the damage of the mining drill"
+price = 15
+max_level = 10
+dependency = NodePath("..")
+
+[node name="Level" parent="UpgradeTree/Tree/Drill/Damage" index="0" unique_id=2060337461]
+visible = true
+
+[node name="Price" parent="UpgradeTree/Tree/Drill/Damage" index="1" unique_id=1653139699]
+text = "₡<null>"
+
+[node name="Line" parent="UpgradeTree/Tree/Drill/Damage" index="2" unique_id=708418238]
+points = PackedVector2Array(-128, -64, -128, 0, 0, 0, 0, 64)
 
 [node name="Coins" type="Label" parent="UpgradeTree" unique_id=720799131]
 layout_mode = 0
 offset_left = 14.0
-offset_top = 18.0
 offset_right = 294.0
-offset_bottom = 87.0
+offset_bottom = 69.0
 theme_override_font_sizes/font_size = 57
 text = "₡?"
 script = ExtResource("10_grdk4")
@@ -486,3 +572,8 @@ metadata/_edit_lock_ = true
 libraries/ = SubResource("AnimationLibrary_6g4si")
 
 [connection signal="pressed" from="SidePanel/NewRun" to="SidePanel" method="_on_new_run_pressed"]
+
+[editable path="UpgradeTree/Tree/Torque"]
+[editable path="UpgradeTree/Tree/Drill"]
+[editable path="UpgradeTree/Tree/Drill/Range"]
+[editable path="UpgradeTree/Tree/Drill/Damage"]

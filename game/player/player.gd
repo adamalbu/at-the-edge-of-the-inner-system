@@ -1,7 +1,6 @@
 extends RigidBody2D
 
 @export var max_health = 50.0
-@export var laser_range = 200.0
 var health = max_health
 
 var controllable = true
@@ -21,7 +20,7 @@ func _ready() -> void:
 
 func _draw() -> void:
 	if !dead:
-		draw_circle(to_local(position), laser_range, Color(0.0, 1.0, 0.0, 0.3), false)
+		draw_circle(to_local(position), GameState.range, Color(0.0, 1.0, 0.0, 0.3), false)
 
 func _process(_delta: float) -> void:
 	if health <= 0 && !dead:

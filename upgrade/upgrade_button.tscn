@@ -36,6 +36,8 @@ text = "₡0"
 z_index = -1
 position = Vector2(96, -64)
 points = PackedVector2Array(0, 0, 0, 64)
+begin_cap_mode = 1
+end_cap_mode = 1
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

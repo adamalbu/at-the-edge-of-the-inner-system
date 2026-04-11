@@ -1,7 +1,6 @@
 extends RayCast2D
 
 @export var lasers: Array[Node2D]
-var laser_range: float
 
 var draw_lasers = false
 
@@ -9,9 +8,6 @@ var draw_lasers = false
 @onready var laser_particles = $LaserParticles
 @onready var laser_light = $LaserLight
 @onready var ship_laser_lights = [$LaserPosLeft/LaserLightLeft, $LaserPosRight/LaserLightLeft]
-
-func _ready() -> void:
-	laser_range = self.get_parent().laser_range
 
 func _draw() -> void:
 	if draw_lasers:
@@ -26,7 +22,7 @@ func _process(delta: float) -> void:
 	var hit_pos = get_collision_point()
 
 
-	if Input.is_action_pressed("fire") and self.is_colliding() && ($"..".global_position - hit_pos).length() <= laser_range:
+	if Input.is_action_pressed("fire") and self.is_colliding() && ($"..".global_position - hit_pos).length() <= GameState.range:
 		var object: Node2D = get_collider()
 		if object is Object and object.is_in_group("asteroid"):
 			draw_lasers = true
@@ -43,7 +39,7 @@ func _process(delta: float) -> void:
 				light.visible = true
 
 			var asteroid = get_collider()
-			asteroid.health -= 10 * delta
+			asteroid.health -= GameState.damage * delta
 			asteroid.damaged_by_player = true
 	else:
 		draw_lasers = false
